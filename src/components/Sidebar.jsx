@@ -23,22 +23,31 @@ function Sidebar({ collapsed, setCollapsed }) {
                 height: '100vh',
                 zIndex: 1000,
                 background: '#001529',
-            }}>
+            }}
+        >
             <div
-                style={{ textAlign: 'center', padding: 10, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                style={{
+                    textAlign: 'center',
+                    padding: 10,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
                 onClick={() => setCollapsed(!collapsed)}
             >
                 <img
                     src={melodiesLogo}
                     alt="Melodies Logo"
-                    style={{ width: 40, height: 40, borderRadius: "100%" }}
+                    style={{ width: 40, height: 40, borderRadius: '100%' }}
                 />
                 {!collapsed && (
                     <span
                         style={{
                             fontSize: '24px',
                             fontWeight: 'bold',
-                            background: 'linear-gradient(to right, #EE10B0, #0E9EEFEB)',
+                            background:
+                                'linear-gradient(to right, #EE10B0, #0E9EEFEB)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                             marginLeft: 10,
