@@ -1,16 +1,53 @@
-import { Card, Typography, Input, Button } from "antd";
+
+import { Card, Typography, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined, GoogleOutlined, FacebookOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import authService from '../services/authService';
+
 
 const { Title, Text } = Typography;
 
 const Login = () => {
+  const navigate = useNavigate();
+
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email format").required("Please input your email!"),
     password: Yup.string().min(6, "Password must be at least 6 characters").required("Please input your password!"),
   });
+
+  const handleSubmit = async (values) => {
+    try {
+      const response = await authService.login({
+        email: values.email,
+        password: values.password
+      });
+      
+      message.success({
+        content: 'Login successful! Welcome back.',
+        duration: 3,
+        style: {
+          marginTop: '20vh',
+        },
+      });
+      
+      // Đợi 2 giây để user đọc thông báo
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
+    } catch (error) {
+      message.error({
+        content: error.message || 'Login failed. Please try again.',
+        duration: 3,
+        style: {
+          marginTop: '20vh',
+        },
+      });
+    }
+  };
+
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", background: "linear-gradient(135deg, #1a1221 0%, #2D1F31 100%)" }}>
@@ -35,7 +72,8 @@ const Login = () => {
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={validationSchema}
-          onSubmit={(values) => console.log("Login Data:", values)}
+          onSubmit={handleSubmit}
+
         >
           {({ handleSubmit }) => (
             <Form style={{ padding: "0 24px" }} onSubmit={handleSubmit}>
@@ -55,6 +93,8 @@ const Login = () => {
                         height: "56px",
                         border: "1px solid rgba(255, 31, 156, 0.3)",
                       }}
+                      className="custom-input"
+
                     />
                   )}
                 </Field>
@@ -77,6 +117,10 @@ const Login = () => {
                         height: "56px",
                         border: "1px solid rgba(255, 31, 156, 0.3)",
                       }}
+
+                      className="custom-input"
+
+
                     />
                   )}
                 </Field>
@@ -142,7 +186,9 @@ const Login = () => {
 
         {/* Signup Section */}
         <div style={{ background: "linear-gradient(135deg, #332433 0%, #3d2a3a 100%)", padding: "40px 24px 24px", textAlign: "center" }}>
+
           <Title level={4} style={{ color: "white", margin: 0, fontWeight: "bold" }}>Don’t Have An Account?</Title>
+
           <Text style={{ color: "rgba(255, 255, 255, 0.9)", display: "block", marginBottom: 16, fontSize: "16px" }}>Sign Up Here</Text>
           <Link to="/register">
             <Button

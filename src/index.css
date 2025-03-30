@@ -44,3 +44,29 @@ body {
 .ant-input {
     border-radius: 6px;
 }
+
+/* Custom input styles */
+.custom-input {
+  color: white !important;
+  background-color: rgba(91, 73, 89, 0.7) !important;
+}
+
+.custom-input input {
+  color: white !important;
+  background-color: rgba(91, 73, 89, 0.7) !important;
+}
+
+.custom-input input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.custom-input:hover,
+.custom-input:focus,
+.custom-input:focus-within {
+  background-color: rgba(91, 73, 89, 0.7) !important;
+}
+
+.custom-input input:hover,
+.custom-input input:focus {
+  background-color: rgba(91, 73, 89, 0.7) !important;
+}
