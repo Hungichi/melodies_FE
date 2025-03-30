@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
+import AppFooter from './components/Footer';
 
 const { Content } = Layout;
 
@@ -30,6 +31,7 @@ function App() {
                             <Route path="/register" element={<Register />} />
                         </Routes>
                     </Content>
+                    <AppFooter />
                 </Layout>
             </Layout>
         </Router>
