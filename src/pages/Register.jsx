@@ -1,3 +1,4 @@
+
 import { Card, Typography, Input, Button, message } from "antd";
 import { UserOutlined, MailOutlined, LockOutlined, PhoneOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
@@ -5,9 +6,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import authService from '../services/authService';
 
+
 const { Title, Text } = Typography;
 
 const Register = () => {
+
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -56,6 +59,7 @@ const Register = () => {
       });
     }
   };
+
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", background: "linear-gradient(135deg, #1a1221 0%, #2D1F31 100%)" }}>
@@ -195,10 +199,12 @@ const Register = () => {
         </Formik>
 
         {/* Login Section */}
+
         <div style={{ background: "linear-gradient(135deg, #332433 0%, #3d2a3a 100%)", padding: "40px 24px 24px", textAlign: "center" }}>
           <Title level={4} style={{ color: "white", margin: 0, fontWeight: "bold" }}>Already Have An Account?</Title>
           <Text style={{ color: "rgba(255, 255, 255, 0.9)", display: "block", marginBottom: 16, fontSize: "16px" }}>Login Here</Text>
           <Link to="/login">
+
             <Button
               type="primary"
               size="large"
@@ -216,6 +222,41 @@ const Register = () => {
       </Card>
     </div>
   );
+};
+
+const fields = [
+  { name: "name", placeholder: "Name", icon: <UserOutlined style={{ color: "rgba(255, 255, 255, 0.8)" }} /> },
+  { name: "email", placeholder: "E-Mail", icon: <MailOutlined style={{ color: "rgba(255, 255, 255, 0.8)" }} /> },
+  { name: "password", placeholder: "Password", icon: <LockOutlined style={{ color: "rgba(255, 255, 255, 0.8)" }} /> },
+  { name: "phone", placeholder: "Phone Number", icon: <PhoneOutlined style={{ color: "rgba(255, 255, 255, 0.8)" }} /> },
+];
+
+const inputStyle = {
+  color: "white",
+  backgroundColor: "rgba(91, 73, 89, 0.7)",
+  borderRadius: "24px",
+  height: "56px",
+  border: "1px solid rgba(255, 31, 156, 0.3)",
+};
+
+const errorStyle = {
+  color: "#ff4db2",
+  fontSize: "12px",
+  marginTop: 4,
+};
+
+const buttonStyle = {
+  borderRadius: "24px",
+  background: "linear-gradient(135deg, #ff1f9c 0%, #ff4db2 100%)",
+  fontWeight: "bold",
+  border: "none",
+};
+
+const loginButtonStyle = {
+  borderRadius: "24px",
+  background: "linear-gradient(135deg, #0099ff 0%, #33b1ff 100%)",
+  fontWeight: "bold",
+  border: "none",
 };
 
 export default Register;
