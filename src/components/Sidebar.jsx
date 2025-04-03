@@ -3,6 +3,9 @@ import {
     HomeOutlined,
     LoginOutlined,
     UserAddOutlined,
+    UserOutlined,
+    PlayCircleOutlined,
+    BookOutlined,
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import melodiesLogo from '../assets/image/Melodies.png';
@@ -61,11 +64,14 @@ function Sidebar({ collapsed, setCollapsed }) {
                 <Menu.Item key="1" icon={<HomeOutlined />}>
                     <Link to="/">Home</Link>
                 </Menu.Item>
-                <Menu.Item key="2" icon={<LoginOutlined />}>
-                    <Link to="/login">Login</Link>
+                <Menu.Item key="2" icon={<PlayCircleOutlined />}>
+                    <Link to="/discover">Discover</Link>
                 </Menu.Item>
-                <Menu.Item key="3" icon={<UserAddOutlined />}>
-                    <Link to="/register">Register</Link>
+                <Menu.Item key="3" icon={< BookOutlined />}>
+                    <Link to="/album">Album</Link>
+                </Menu.Item>
+                <Menu.Item key="4" icon={< BookOutlined />}>
+                    <Link to="/artist">Artist</Link>
                 </Menu.Item>
             </Menu>
         </Sider>
