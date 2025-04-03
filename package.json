@@ -15,6 +15,7 @@
         "@hookform/resolvers": "^5.0.1",
         "@reduxjs/toolkit": "^2.6.1",
         "antd": "^5.24.5",
+        "axios": "^1.8.4",
         "format": "^0.2.2",
         "formik": "^2.4.6",
         "lucide-react": "^0.487.0",
