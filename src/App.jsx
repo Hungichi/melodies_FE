@@ -7,6 +7,9 @@ import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import AppFooter from './components/Footer';
+import DiscoverPage from './pages/Discover';
+import Album from './pages/Album';
+import ArtistProfileForm from './pages/Artist';
 
 const { Content } = Layout;
 
@@ -29,6 +32,9 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
+                            <Route path="/discover" element={<DiscoverPage />} />
+                            <Route path="/album" element={<Album />} />
+                            <Route path="/artist" element={<ArtistProfileForm/>} />
                         </Routes>
                     </Content>
                     <AppFooter />
