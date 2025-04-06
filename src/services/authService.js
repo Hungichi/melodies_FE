@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../config/axios';
 
 const API_URL = 'http://localhost:5000/api';
 
@@ -8,9 +8,11 @@ const authService = {
   // Đăng ký
   async register(userData) {
     try {
-      const response = await axios.post(`${API_URL}/auth/register`, userData);
-      if (response.data.token) {
-        currentUser = response.data;
+      const response = await axios.post('/api/auth/register', userData);
+      if (response.data.success) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        currentUser = response.data.user;
         window.dispatchEvent(new Event('authChange'));
       }
       return response.data;
@@ -22,9 +24,11 @@ const authService = {
   // Đăng nhập
   async login(credentials) {
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, credentials);
-      if (response.data.token) {
-        currentUser = response.data;
+      const response = await axios.post('/api/auth/login', credentials);
+      if (response.data.success) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        currentUser = response.data.user;
         window.dispatchEvent(new Event('authChange'));
       }
       return response.data;
@@ -35,22 +39,43 @@ const authService = {
 
   // Đăng xuất
   logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     currentUser = null;
     window.dispatchEvent(new Event('authChange'));
   },
 
   // Lấy thông tin user hiện tại
-  getCurrentUser() {
-    return currentUser;
+  async getCurrentUser() {
+    const response = await axios.get('/api/auth/me');
+    return response.data;
   },
 
   // Kiểm tra đã đăng nhập chưa
   isAuthenticated() {
-    return !!currentUser;
+    const token = localStorage.getItem('token');
+    return !!token;
   },
 
   getToken() {
-    return currentUser?.token;
+    return localStorage.getItem('token');
+  },
+
+  // Update profile
+  async updateProfile(userData) {
+    const response = await axios.put('/api/auth/profile', userData);
+    if (response.data.success) {
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      currentUser = response.data.user;
+      window.dispatchEvent(new Event('authChange'));
+    }
+    return response.data;
+  },
+
+  // Get stored user data
+  getStoredUser() {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
   }
 };
 
