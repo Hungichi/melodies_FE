@@ -1,4 +1,3 @@
-
 import { Card, Typography, Input, Button, message } from "antd";
 import { UserOutlined, MailOutlined, LockOutlined, PhoneOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,11 +5,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import authService from '../services/authService';
 
-
 const { Title, Text } = Typography;
 
 const Register = () => {
-
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -51,7 +48,7 @@ const Register = () => {
       }, 2000);
     } catch (error) {
       message.error({
-        content: error.message || 'Registration failed. Please try again.',
+        content: error.response?.data?.message || 'Registration failed. Please try again.',
         duration: 3,
         style: {
           marginTop: '20vh',
@@ -59,7 +56,6 @@ const Register = () => {
       });
     }
   };
-
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", background: "linear-gradient(135deg, #1a1221 0%, #2D1F31 100%)" }}>
@@ -199,12 +195,10 @@ const Register = () => {
         </Formik>
 
         {/* Login Section */}
-
         <div style={{ background: "linear-gradient(135deg, #332433 0%, #3d2a3a 100%)", padding: "40px 24px 24px", textAlign: "center" }}>
           <Title level={4} style={{ color: "white", margin: 0, fontWeight: "bold" }}>Already Have An Account?</Title>
           <Text style={{ color: "rgba(255, 255, 255, 0.9)", display: "block", marginBottom: 16, fontSize: "16px" }}>Login Here</Text>
           <Link to="/login">
-
             <Button
               type="primary"
               size="large"

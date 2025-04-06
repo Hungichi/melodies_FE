@@ -1,24 +1,41 @@
-import { Card, Row, Col, Typography, Button, Layout, Menu, List, Avatar, Space, Divider, Input } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Card, Row, Col, Typography, Button, Layout, Menu, List, Avatar, Space, Divider, Input, Carousel } from 'antd';
 import { PlayCircleOutlined, HeartOutlined, UserOutlined, HomeOutlined, SearchOutlined, PlaySquareOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import authService from '../services/authService';
+import UserMenu from '../components/UserMenu';
 
-const { Header, Sider, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 const { Title, Text, Paragraph } = Typography;
 
 const Home = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(authService.isAuthenticated());
+
+  useEffect(() => {
+    const handleAuthChange = () => {
+      setIsAuthenticated(authService.isAuthenticated());
+    };
+
+    window.addEventListener('authChange', handleAuthChange);
+
+    return () => {
+      window.removeEventListener('authChange', handleAuthChange);
+    };
+  }, []);
+
   // Sample data for different sections
   const weeklyTopSongs = [
-    { id: 1, title: 'Song 1', artist: 'Artist 1', cover: 'https://via.placeholder.com/200' },
-    { id: 2, title: 'Song 2', artist: 'Artist 2', cover: 'https://via.placeholder.com/200' },
-    { id: 3, title: 'Song 3', artist: 'Artist 3', cover: 'https://via.placeholder.com/200' },
-    { id: 4, title: 'Song 4', artist: 'Artist 4', cover: 'https://via.placeholder.com/200' },
+    { id: 1, title: 'Song 1', artist: 'Artist 1', cover: 'https://picsum.photos/200' },
+    { id: 2, title: 'Song 2', artist: 'Artist 2', cover: 'https://picsum.photos/200' },
+    { id: 3, title: 'Song 3', artist: 'Artist 3', cover: 'https://picsum.photos/200' },
+    { id: 4, title: 'Song 4', artist: 'Artist 4', cover: 'https://picsum.photos/200' },
   ];
 
   const newReleases = [
-    { id: 1, title: 'New Song 1', artist: 'Artist 1', cover: 'https://via.placeholder.com/200' },
-    { id: 2, title: 'New Song 2', artist: 'Artist 2', cover: 'https://via.placeholder.com/200' },
-    { id: 3, title: 'New Song 3', artist: 'Artist 3', cover: 'https://via.placeholder.com/200' },
-    { id: 4, title: 'New Song 4', artist: 'Artist 4', cover: 'https://via.placeholder.com/200' },
+    { id: 1, title: 'New Song 1', artist: 'Artist 1', cover: 'https://picsum.photos/200' },
+    { id: 2, title: 'New Song 2', artist: 'Artist 2', cover: 'https://picsum.photos/200' },
+    { id: 3, title: 'New Song 3', artist: 'Artist 3', cover: 'https://picsum.photos/200' },
+    { id: 4, title: 'New Song 4', artist: 'Artist 4', cover: 'https://picsum.photos/200' },
   ];
 
   const trendingSongs = [
@@ -32,65 +49,75 @@ const Home = () => {
   ];
 
   const popularArtists = [
-    { name: 'Eminem', avatar: 'https://via.placeholder.com/100' },
-    { name: 'Imagine Dragons', avatar: 'https://via.placeholder.com/100' },
-    { name: 'Adele', avatar: 'https://via.placeholder.com/100' },
-    { name: 'Lana Del Rey', avatar: 'https://via.placeholder.com/100' },
-    { name: 'Harry Styles', avatar: 'https://via.placeholder.com/100' },
-    { name: 'Billie Eilish', avatar: 'https://via.placeholder.com/100' },
+    { name: 'Eminem', avatar: 'https://picsum.photos/100' },
+    { name: 'Imagine Dragons', avatar: 'https://picsum.photos/100' },
+    { name: 'Adele', avatar: 'https://picsum.photos/100' },
+    { name: 'Lana Del Rey', avatar: 'https://picsum.photos/100' },
+    { name: 'Harry Styles', avatar: 'https://picsum.photos/100' },
+    { name: 'Billie Eilish', avatar: 'https://picsum.photos/100' },
   ];
 
   const musicVideos = [
-    { title: 'Gossip', artist: 'Måneskin', cover: 'https://via.placeholder.com/200' },
-    { title: 'Shape of You', artist: 'Ed Sheeran', cover: 'https://via.placeholder.com/200' },
-    { title: 'Someone Like You', artist: 'Adele', cover: 'https://via.placeholder.com/200' },
+    { title: 'Gossip', artist: 'Måneskin', cover: 'https://picsum.photos/200' },
+    { title: 'Shape of You', artist: 'Ed Sheeran', cover: 'https://picsum.photos/200' },
+    { title: 'Someone Like You', artist: 'Adele', cover: 'https://picsum.photos/200' },
   ];
 
   const topAlbums = [
-    { title: 'Meteora', artist: 'Linkin Park', cover: 'https://via.placeholder.com/200' },
-    { title: 'Midnight Marauders', artist: 'A Tribe Called Quest', cover: 'https://via.placeholder.com/200' },
-    { title: 'Evermore', artist: 'Taylor Swift', cover: 'https://via.placeholder.com/200' },
-    { title: 'Born To Die', artist: 'Lana Del Rey', cover: 'https://via.placeholder.com/200' },
+    { title: 'Meteora', artist: 'Linkin Park', cover: 'https://picsum.photos/200' },
+    { title: 'Midnight Marauders', artist: 'A Tribe Called Quest', cover: 'https://picsum.photos/200' },
+    { title: 'Evermore', artist: 'Taylor Swift', cover: 'https://picsum.photos/200' },
+    { title: 'Born To Die', artist: 'Lana Del Rey', cover: 'https://picsum.photos/200' },
   ];
 
   const moodPlaylists = [
-    { title: 'Sad Songs', cover: 'https://via.placeholder.com/200' },
-    { title: 'Chill Songs', cover: 'https://via.placeholder.com/200' },
-    { title: 'Workout Songs', cover: 'https://via.placeholder.com/200' },
-    { title: 'Love Playlists', cover: 'https://via.placeholder.com/200' },
-    { title: 'Happy Tunes', cover: 'https://via.placeholder.com/200' },
+    { title: 'Sad Songs', cover: 'https://picsum.photos/200' },
+    { title: 'Chill Songs', cover: 'https://picsum.photos/200' },
+    { title: 'Workout Songs', cover: 'https://picsum.photos/200' },
+    { title: 'Love Playlists', cover: 'https://picsum.photos/200' },
+    { title: 'Happy Tunes', cover: 'https://picsum.photos/200' },
   ];
+
+  const renderSongCard = (item) => (
+    <Card
+      hoverable
+      cover={<img alt={item.title} src={item.cover} />}
+      style={{ width: 200, margin: '0 15px' }}
+    >
+      <Card.Meta title={item.title} description={item.artist} />
+    </Card>
+  );
 
   return (
     <Layout style={{ minHeight: '100vh', background: '#1a1221' }}>
-      
-
       <Layout style={{ background: '#1a1221' }}>
         {/* Header */}
+        <Header style={{ 
+          background: '#412C3A', 
+          padding: '0 24px',
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'center'
+        }}>
+          
+        </Header>
 
         {/* Main Content */}
         <Content style={{ padding: '24px', background: '#1a1221' }}>
           {/* Hero Section */}
-          <Card
-            cover={<img alt="Billie Eilish" src="https://via.placeholder.com/1200x300" />}
-            style={{ borderRadius: '8px', marginBottom: '40px', background: '#3d2a3a', border: 'none' }}
-            bodyStyle={{ textAlign: 'center', padding: '20px' }}
-          >
-            <Title level={2} style={{ color: 'white', marginBottom: '10px' }}>
-              Billie Eilish
-            </Title>
-            <Paragraph style={{ color: 'white', fontSize: '16px', maxWidth: '600px', margin: '0 auto' }}>
-              Billie Eilish is known for her unique sound and style, blending pop with dark, introspective themes.
-            </Paragraph>
-            <Button
-              type="primary"
-              size="large"
-              icon={<PlayCircleOutlined />}
-              style={{ marginTop: '20px', background: '#ff1f9c', border: 'none', borderRadius: '20px' }}
-            >
-              Play Now
-            </Button>
-          </Card>
+          <Carousel autoplay>
+            <div>
+              <Card
+                style={{ width: '100%', height: 300, background: '#412C3A' }}
+                cover={<img alt="Billie Eilish" src="https://picsum.photos/1200/300" />}
+              >
+                <Card.Meta
+                  title={<Typography.Title level={2} style={{ color: 'white', margin: 0 }}>Featured Artist: Billie Eilish</Typography.Title>}
+                  description={<Typography.Text style={{ color: '#B4A7AE' }}>Latest album out now</Typography.Text>}
+                />
+              </Card>
+            </div>
+          </Carousel>
 
           {/* Weekly Top Songs */}
           <Title level={3} style={{ color: 'white', marginBottom: '20px' }}>
@@ -99,26 +126,7 @@ const Home = () => {
           <Row gutter={[16, 16]}>
             {weeklyTopSongs.map((song) => (
               <Col xs={24} sm={12} md={6} key={song.id}>
-                <Card
-                  hoverable
-                  cover={<img alt={song.title} src={song.cover} />}
-                  style={{ background: '#3d2a3a', border: 'none' }}
-                  bodyStyle={{ padding: '10px' }}
-                  actions={[
-                    <Button
-                      type="primary"
-                      icon={<PlayCircleOutlined />}
-                      style={{ background: '#ff1f9c', border: 'none', borderRadius: '20px' }}
-                    >
-                      Play
-                    </Button>,
-                  ]}
-                >
-                  <Card.Meta
-                    title={<span style={{ color: 'white' }}>{song.title}</span>}
-                    description={<span style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{song.artist}</span>}
-                  />
-                </Card>
+                {renderSongCard(song)}
               </Col>
             ))}
             <Col xs={24} style={{ textAlign: 'right' }}>
@@ -133,26 +141,7 @@ const Home = () => {
           <Row gutter={[16, 16]}>
             {newReleases.map((song) => (
               <Col xs={24} sm={12} md={6} key={song.id}>
-                <Card
-                  hoverable
-                  cover={<img alt={song.title} src={song.cover} />}
-                  style={{ background: '#3d2a3a', border: 'none' }}
-                  bodyStyle={{ padding: '10px' }}
-                  actions={[
-                    <Button
-                      type="primary"
-                      icon={<PlayCircleOutlined />}
-                      style={{ background: '#ff1f9c', border: 'none', borderRadius: '20px' }}
-                    >
-                      Play
-                    </Button>,
-                  ]}
-                >
-                  <Card.Meta
-                    title={<span style={{ color: 'white' }}>{song.title}</span>}
-                    description={<span style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{song.artist}</span>}
-                  />
-                </Card>
+                {renderSongCard(song)}
               </Col>
             ))}
             <Col xs={24} style={{ textAlign: 'right' }}>
@@ -288,30 +277,7 @@ const Home = () => {
               <Button type="link" style={{ color: '#ff1f9c' }}>View All</Button>
             </Col>
           </Row>
-
-          {/* Join Our Platform */}
-          <Card style={{ marginTop: '40px', background: '#3d2a3a', border: 'none', borderRadius: '8px' }} bodyStyle={{ textAlign: 'center', padding: '40px' }}>
-            <Title level={3} style={{ color: 'white' }}>
-              Join Our Platform
-            </Title>
-            <Paragraph style={{ color: 'rgba(255, 255, 255, 0.7)', maxWidth: '600px', margin: '0 auto' }}>
-              You can be one of the members of our platform by just adding some necessary information. If you already have an account on our website, you can just hit the login button.
-            </Paragraph>
-            <Space style={{ marginTop: '20px' }}>
-              <Link to="/register">
-              <Button type="primary" style={{ background: '#ff1f9c', border: 'none', borderRadius: '20px' }}>
-                Sign Up
-              </Button>
-              </Link>
-              <Link to ="/login">
-              <Button type="primary" style={{ background: '#ff1f9c', border: 'none', borderRadius: '20px' }}>
-                Login
-              </Button>
-            </Link>
-            </Space>
-          </Card>
         </Content>
-
       </Layout>
     </Layout>
   );

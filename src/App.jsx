@@ -10,6 +10,8 @@ import AppFooter from './components/Footer';
 import DiscoverPage from './pages/Discover';
 import Album from './pages/Album';
 import ArtistProfileForm from './pages/Artist';
+import Profile from './pages/Profile';
+import ArtistRegistration from './pages/ArtistRegistration';
 
 const { Content } = Layout;
 
@@ -32,9 +34,11 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
+                            <Route path="/profile" element={<Profile />} />
                             <Route path="/discover" element={<DiscoverPage />} />
                             <Route path="/album" element={<Album />} />
                             <Route path="/artist" element={<ArtistProfileForm/>} />
+                            <Route path="/artist-registration" element={<ArtistRegistration />} />
                         </Routes>
                     </Content>
                     <AppFooter />
