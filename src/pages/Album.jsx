@@ -171,7 +171,7 @@ const Album = () => {
   <Col span={6}>Title</Col>
   <Col span={6}>Release Date</Col>
   <Col span={5}>Album</Col>
-  <Col span={1}>Time</Col> {/* Điều chỉnh lại số span để khớp */}
+  <Col span={1}>Time</Col> 
 </Row>
 
             <List

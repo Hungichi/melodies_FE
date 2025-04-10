@@ -8,58 +8,84 @@ const { Title, Text, Paragraph } = Typography;
 const Home = () => {
   // Sample data for different sections
   const weeklyTopSongs = [
-    { id: 1, title: 'Song 1', artist: 'Artist 1', cover: 'https://via.placeholder.com/200' },
-    { id: 2, title: 'Song 2', artist: 'Artist 2', cover: 'https://via.placeholder.com/200' },
-    { id: 3, title: 'Song 3', artist: 'Artist 3', cover: 'https://via.placeholder.com/200' },
-    { id: 4, title: 'Song 4', artist: 'Artist 4', cover: 'https://via.placeholder.com/200' },
+    { id: 1, title: 'Giờ thì', artist: 'BuiTruongLinh', cover: 'https://i.ytimg.com/vi/ItRExComFJ4/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDmBi5S0ns9U9U25Z04m3xV3mWXKg' },
+    { id: 2, title: 'Phép màu', artist: 'Đàn cá gỗ', cover: 'https://i.ytimg.com/vi/OkXnZSafFns/hqdefault.jpg?sqp=-oaymwExCOADEI4CSFryq4qpAyMIARUAAIhCGAHwAQH4AbYIgAK4CIoCDAgAEAEYNyBWKHIwDw==&rs=AOn4CLCvFmvPvVXXJRKWbC8dB9tgZXOGKg' },
+    { id: 3, title: 'Chưa phải yêu', artist: 'HURRYKNG', cover: 'https://i.ytimg.com/vi/tvRo6gajlrk/hqdefault.jpg?sqp=-oaymwExCOADEI4CSFryq4qpAyMIARUAAIhCGAHwAQH4Af4JgALQBYoCDAgAEAEYYiBlKEgwDw==&rs=AOn4CLCEawlmmm6gi3EX0QcJZD-UZZbhxg' },
+    { id: 4, title: 'Lời nói dối chân thật', artist: 'Tlinh', cover: 'https://i.ytimg.com/vi/koRbmP0BbNk/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCT2wJjFI0W_RsfqWV0AsQ3FymMAg' },
   ];
 
   const newReleases = [
-    { id: 1, title: 'New Song 1', artist: 'Artist 1', cover: 'https://via.placeholder.com/200' },
-    { id: 2, title: 'New Song 2', artist: 'Artist 2', cover: 'https://via.placeholder.com/200' },
-    { id: 3, title: 'New Song 3', artist: 'Artist 3', cover: 'https://via.placeholder.com/200' },
-    { id: 4, title: 'New Song 4', artist: 'Artist 4', cover: 'https://via.placeholder.com/200' },
+    { id: 1, title: 'Vùng ký ức', artist: 'Chillies', cover: 'https://i.ytimg.com/vi/T0sHaz4H9MQ/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBVvWZ0jr7P8EWi_xkDbhMqbtpb5g' },
+    { id: 2, title: 'Người bình thường', artist: 'Vũ Cát Tường', cover: 'https://i.ytimg.com/vi/X5KvHXWPYm4/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAwL9MqR7lqZumeOQYbipqV2hhl2w' },
+    { id: 3, title: 'Dancing In The Dark', artist: 'SOOBIN', cover: 'https://i.ytimg.com/vi/OZmK0YuSmXU/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCPG30-OAdTn5SuBabto2Z5kfspFw' },
+    { id: 4, title: 'Bầu trời mới', artist: 'DaLAB', cover: 'https://i.ytimg.com/vi/Z1D26z9l8y8/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCvdXisBF7b9ORftL0l2m2AZhqGYg' },
   ];
-
   const trendingSongs = [
-    { rank: 1, title: 'Sicko Mode', artist: 'Travis Scott', date: 'Nov 28, 2023', duration: '2:42' },
-    { rank: 2, title: 'Skyfall Beats', artist: 'Imagine Dragons', date: 'Oct 15, 2023', duration: '3:15' },
-    { rank: 3, title: 'Greedy', artist: 'Tate McRae', date: 'Dec 01, 2023', duration: '2:11' },
-    { rank: 4, title: 'Lovin On Me', artist: 'Jack Harlow', date: 'Dec 05, 2023', duration: '2:18' },
-    { rank: 5, title: 'Paint The Town Red', artist: 'Doja Cat', date: 'Dec 10, 2023', duration: '3:51' },
-    { rank: 6, title: 'Dance On Night', artist: 'Dua Lipa', date: 'May 27, 2023', duration: '2:56' },
-    { rank: 7, title: 'Water', artist: 'Tyla', date: 'Dec 15, 2023', duration: '3:20' },
+    { rank: 1, title: 'Ôm em thật lâu', artist: 'MONO', date: '3 thg 4, 2025', duration: '5:41' },
+    { rank: 2, title: 'Lễ đường', artist: 'Kai Dinh', date: '17 thg 3, 2025', duration: '4:10' },
+    { rank: 3, title: 'Chạy về khóc với anh', artist: 'Erik', date: '5 thg 1, 2024', duration: '4:02' },
+    { rank: 4, title: 'Em bé', artist: 'AMEE', date: '20 thg 12, 2023', duration: '3:15' },
+    { rank: 5, title: 'Thích em hơi nhiều', artist: 'Wren Evans', date: '10 thg 11, 2023', duration: '3:21' },
+    { rank: 6, title: 'Nàng thơ', artist: 'Hoàng Dũng', date: '27 thg 5, 2023', duration: '4:25' },
+    { rank: 7, title: 'Tình yêu xanh lá', artist: 'Thịnh Suy', date: '15 thg 10, 2023', duration: '3:47' },
   ];
 
   const popularArtists = [
-    { name: 'Eminem', avatar: 'https://via.placeholder.com/100' },
-    { name: 'Imagine Dragons', avatar: 'https://via.placeholder.com/100' },
-    { name: 'Adele', avatar: 'https://via.placeholder.com/100' },
-    { name: 'Lana Del Rey', avatar: 'https://via.placeholder.com/100' },
-    { name: 'Harry Styles', avatar: 'https://via.placeholder.com/100' },
-    { name: 'Billie Eilish', avatar: 'https://via.placeholder.com/100' },
+    { name: 'Sơn Tùng M-TP', avatar: 'https://tse2.mm.bing.net/th?id=OIP.324bsajLsJTW9JAQ9tXJkgHaHa&w=474&h=474&c=7' },
+    { name: 'Đen Vâu', avatar: 'https://tse4.mm.bing.net/th?id=OIP.hiW7M6cj0k_BP24AYhLcJgHaHa&w=474&h=474&c=7' },
+    { name: 'Hoàng Thùy Linh', avatar: 'https://tse4.mm.bing.net/th?id=OIP.IAHLVTjvlQa1TJXRThnopAHaLG&w=474&h=474&c=7' },
+    { name: 'Erik', avatar: 'https://tse3.mm.bing.net/th?id=OIP.v8eVtfjjEStVWXkWXNC9YAHaJQ&w=474&h=474&c=7' },
+    { name: 'AMEE', avatar: 'https://tse4.mm.bing.net/th?id=OIP.PxhFT8aFwpPKm7l0ub8A_AHaKn&w=474&h=474&c=7' },
+    { name: 'Hoàng Dũng', avatar: 'https://tse4.mm.bing.net/th?id=OIP.FE9pO0f7qa92_W16gnq-2QHaLH&w=474&h=474&c=7' },
   ];
-
   const musicVideos = [
-    { title: 'Gossip', artist: 'Måneskin', cover: 'https://via.placeholder.com/200' },
-    { title: 'Shape of You', artist: 'Ed Sheeran', cover: 'https://via.placeholder.com/200' },
-    { title: 'Someone Like You', artist: 'Adele', cover: 'https://via.placeholder.com/200' },
+    { title: 'Gossip', artist: 'Måneskin', cover: 'https://i.ytimg.com/vi/KXvCS2KBbPw/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAj4BIBZIOu5KJKkesYYPPFUQRMzA' },
+    { title: 'Shape of You', artist: 'Ed Sheeran', cover: 'https://i.ytimg.com/vi/JGwWNGJdvx8/hqdefault.jpg?sqp=-oaymwEnCOADEI4CSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCyNhDKz_FSbd7MP8gOwFKaWOeSSQ' },
+    { title: 'Easy On Me ', artist: 'Adele', cover: 'https://i.ytimg.com/vi/X-yIEMduRXk/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCQqarWqJLZ1nKq0oWJgbRef6R8vA' },
   ];
 
   const topAlbums = [
-    { title: 'Meteora', artist: 'Linkin Park', cover: 'https://via.placeholder.com/200' },
-    { title: 'Midnight Marauders', artist: 'A Tribe Called Quest', cover: 'https://via.placeholder.com/200' },
-    { title: 'Evermore', artist: 'Taylor Swift', cover: 'https://via.placeholder.com/200' },
-    { title: 'Born To Die', artist: 'Lana Del Rey', cover: 'https://via.placeholder.com/200' },
+    { title: 'Meteora', artist: 'Linkin Park', cover: 'https://tse4.mm.bing.net/th?id=OIP.CkVSativ_3X5C9zcWbSY8QHaF7&w=379&h=379&c=7' },
+    { title: 'Midnight Marauders', artist: 'A Tribe Called Quest', cover: 'https://tse2.mm.bing.net/th?id=OIP.zQcoms9WT5fTCUvUy8uOhwHaHg&w=474&h=474&c=7' },
+    { title: 'Evermore', artist: 'Taylor Swift', cover: 'https://tse2.mm.bing.net/th?id=OIP.trPAqMECa38q0l_se2FuMQHaKc&cb=iwp&w=474&h=474&c=7' },
+    { title: 'Born To Die', artist: 'Lana Del Rey', cover: 'https://tse4.mm.bing.net/th?id=OIP.yxfJP_IVmwskklTIZ4YcYQHaHa&w=474&h=474&c=7' },
   ];
 
   const moodPlaylists = [
-    { title: 'Sad Songs', cover: 'https://via.placeholder.com/200' },
-    { title: 'Chill Songs', cover: 'https://via.placeholder.com/200' },
-    { title: 'Workout Songs', cover: 'https://via.placeholder.com/200' },
-    { title: 'Love Playlists', cover: 'https://via.placeholder.com/200' },
-    { title: 'Happy Tunes', cover: 'https://via.placeholder.com/200' },
+    { 
+      title: 'Sad Songs', 
+      cover: 'https://tse1.mm.bing.net/th?id=OIP.QE_H9FWJP-8ZsVpcJl8zWwHaHa&w=474&h=474&c=7' 
+    },
+    { 
+      title: 'Chill Songs', 
+      cover: 'https://tse1.mm.bing.net/th?id=OIP.R3YGoXiCS9EL4UJnTsP6nAHaHa&w=474&h=474&c=7' 
+    },
+    { 
+      title: 'Workout Songs', 
+      cover: 'https://tse2.mm.bing.net/th?id=OIP.fRAI7aZlOs_BY_eQYZanOAHaHa&w=474&h=474&c=7' 
+    },
+    { 
+      title: 'Love Playlists', 
+      cover: 'https://tse1.mm.bing.net/th?id=OIP.Ht8T5qersvFL_fzVhOM3yQHaHa&pid=Api' 
+    },
+    { 
+      title: 'Happy Tunes', 
+      cover: 'https://tse4.mm.bing.net/th?id=OIP.3ypnmZ-qgSCaJkWF7OGp0wHaHa&w=474&h=474&c=7' 
+    },
+    { 
+      title: 'Rainy Day Vibes', 
+      cover: 'https://tse3.mm.bing.net/th?id=OIP.FDQHV-O0NpI6ZiVsWFb7UAHaHa&w=474&h=474&c=7' 
+    },
+    { 
+      title: 'Late Night Drives', 
+      cover: 'https://tse4.mm.bing.net/th?id=OIP.eoyen5qAjXFA0aHNqqr_NAHaHa&w=474&h=474&c=7' 
+    },
+    { 
+      title: 'Focus Beats', 
+      cover: 'https://tse4.mm.bing.net/th?id=OIP.4RKrGPs7AWjNn5fMvn0vXQHaHa&w=474&h=474&c=7' 
+    }
   ];
+  
 
   return (
     <Layout style={{ minHeight: '100vh', background: '#1a1221' }}>
@@ -72,25 +98,33 @@ const Home = () => {
         <Content style={{ padding: '24px', background: '#1a1221' }}>
           {/* Hero Section */}
           <Card
-            cover={<img alt="Billie Eilish" src="https://via.placeholder.com/1200x300" />}
-            style={{ borderRadius: '8px', marginBottom: '40px', background: '#3d2a3a', border: 'none' }}
-            bodyStyle={{ textAlign: 'center', padding: '20px' }}
-          >
-            <Title level={2} style={{ color: 'white', marginBottom: '10px' }}>
-              Billie Eilish
-            </Title>
-            <Paragraph style={{ color: 'white', fontSize: '16px', maxWidth: '600px', margin: '0 auto' }}>
-              Billie Eilish is known for her unique sound and style, blending pop with dark, introspective themes.
-            </Paragraph>
-            <Button
-              type="primary"
-              size="large"
-              icon={<PlayCircleOutlined />}
-              style={{ marginTop: '20px', background: '#ff1f9c', border: 'none', borderRadius: '20px' }}
-            >
-              Play Now
-            </Button>
-          </Card>
+  cover={
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',paddingTop:'50px' }}>
+      <img
+        alt="Billie Eilish"
+        src="https://www.nme.com/wp-content/uploads/2023/12/Billie-Eilish-2.jpg"
+        style={{ width: '1200px', height: '620px', objectFit: 'cover', borderRadius:'10px' }} // Adjusted height with px unit
+      />
+    </div>
+  }
+  style={{ borderRadius: '8px', marginBottom: '40px', background: '#3d2a3a', border: 'none' }}
+  bodyStyle={{ textAlign: 'center', padding: '20px' }}
+>
+  <Title level={2} style={{ color: 'white', marginBottom: '10px' }}>
+    Billie Eilish
+  </Title>
+  <Paragraph style={{ color: 'white', fontSize: '16px', maxWidth: '600px', margin: '0 auto' }}>
+    Billie Eilish is known for her unique sound and style, blending pop with dark, introspective themes.
+  </Paragraph>
+  <Button
+    type="primary"
+    size="large"
+    icon={<PlayCircleOutlined />}
+    style={{ marginTop: '20px', background: '#ff1f9c', border: 'none', borderRadius: '20px' }}
+  >
+    Play Now
+  </Button>
+</Card>
 
           {/* Weekly Top Songs */}
           <Title level={3} style={{ color: 'white', marginBottom: '20px' }}>

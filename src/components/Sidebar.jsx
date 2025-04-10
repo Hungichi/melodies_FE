@@ -6,6 +6,7 @@ import {
     UserOutlined,
     PlayCircleOutlined,
     BookOutlined,
+    LoadingOutlined,
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import melodiesLogo from '../assets/image/Melodies.png';
@@ -72,6 +73,9 @@ function Sidebar({ collapsed, setCollapsed }) {
                 </Menu.Item>
                 <Menu.Item key="4" icon={< BookOutlined />}>
                     <Link to="/artist">Artist</Link>
+                </Menu.Item>
+                <Menu.Item key="5" icon={< LoadingOutlined />}>
+                    <Link to="/upload">Upload Music</Link>
                 </Menu.Item>
             </Menu>
         </Sider>

@@ -10,7 +10,7 @@ import AppFooter from './components/Footer';
 import DiscoverPage from './pages/Discover';
 import Album from './pages/Album';
 import ArtistProfileForm from './pages/Artist';
-
+import MusicUploadPage from './pages/Upload';
 const { Content } = Layout;
 
 function App() {
@@ -35,6 +35,7 @@ function App() {
                             <Route path="/discover" element={<DiscoverPage />} />
                             <Route path="/album" element={<Album />} />
                             <Route path="/artist" element={<ArtistProfileForm/>} />
+                            <Route path="/upload" element={<MusicUploadPage/>}/>
                         </Routes>
                     </Content>
                     <AppFooter />
