@@ -11,37 +11,54 @@ import DiscoverPage from './pages/Discover';
 import Album from './pages/Album';
 import ArtistProfileForm from './pages/Artist';
 import MusicUploadPage from './pages/Upload';
+import { AudioPlayerProvider } from './contexts/AudioPlayerContext';
+import MusicPlayerBar from './components/MusicPlayerBar';
+
 const { Content } = Layout;
 
 function App() {
     const [collapsed, setCollapsed] = useState(false);
 
     return (
-        <Router>
-            <Layout style={{ minHeight: '100vh' }}>
-                <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-                <Layout
-                    style={{
-                        marginLeft: collapsed ? 80 : 200,
-                        transition: 'margin-left 0.2s',
-                    }}
-                >
-                    <Navbar />
-                    <Content style={{ padding: '24px', background: '#412C3A' }}>
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/discover" element={<DiscoverPage />} />
-                            <Route path="/album" element={<Album />} />
-                            <Route path="/artist" element={<ArtistProfileForm/>} />
-                            <Route path="/upload" element={<MusicUploadPage/>}/>
-                        </Routes>
-                    </Content>
-                    <AppFooter />
+        <AudioPlayerProvider>
+            <Router>
+                <Layout style={{ minHeight: '100vh' }}>
+                    <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+                    <Layout
+                        style={{
+                            marginLeft: collapsed ? 80 : 200,
+                            transition: 'margin-left 0.2s',
+                            position: 'relative',
+                            paddingBottom: '80px'
+                        }}
+                    >
+                        <Navbar />
+                        <Content style={{ padding: '24px', background: '#412C3A' }}>
+                            <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/register" element={<Register />} />
+                                <Route path="/discover" element={<DiscoverPage />} />
+                                <Route path="/album" element={<Album />} />
+                                <Route path="/artist" element={<ArtistProfileForm/>} />
+                                <Route path="/upload" element={<MusicUploadPage/>}/>
+                            </Routes>
+                        </Content>
+                        <AppFooter />
+                    </Layout>
+                    <div style={{ 
+                        position: 'fixed', 
+                        bottom: 0, 
+                        left: collapsed ? 80 : 200, 
+                        right: 0, 
+                        zIndex: 1000,
+                        transition: 'left 0.2s'
+                    }}>
+                        <MusicPlayerBar />
+                    </div>
                 </Layout>
-            </Layout>
-        </Router>
+            </Router>
+        </AudioPlayerProvider>
     );
 }
 export default App;
