@@ -1,88 +1,53 @@
-import { useState } from 'react';
-import { Layout, Menu, Button, Space, Input } from 'antd';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import {
-  HomeOutlined,
-  UserOutlined,
-  LoginOutlined,
-  PlayCircleOutlined,
-  BookOutlined,
-  SearchOutlined,
-} from '@ant-design/icons';
-
-const { Header } = Layout;
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from 'antd';
+import authService from '../services/authService';
+import UserMenu from './UserMenu';
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const [active, setActive] = useState('login');
-  const location = useLocation();
-  const [selectedKeys, setSelectedKeys] = useState([location.pathname]);
+  const [isAuthenticated, setIsAuthenticated] = useState(authService.isAuthenticated());
 
-  const handleMenuClick = (key) => {
-    setSelectedKeys([key]);
-  };
+  useEffect(() => {
+    // Lắng nghe sự kiện khi user đăng nhập/đăng xuất
+    const handleAuthChange = () => {
+      setIsAuthenticated(authService.isAuthenticated());
+    };
 
-  const menuItemSelectedColor = '#ff6b81';
-  const menuItemSelectedBackground = '#2a1d25';
+    // Thêm event listener
+    window.addEventListener('authChange', handleAuthChange);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('authChange', handleAuthChange);
+    };
+  }, []);
 
   return (
-    <Header
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        background: '#412C3A',
-        padding: '0 24px',
-        boxShadow: 'none',
-      }}
-    >
-      
-      <Space style={{ flex: 1, justifyContent: 'flex-end' }}>
-        <Input
-          prefix={
-            <SearchOutlined
-              style={{ color: 'rgba(255, 255, 255, 0.85)' }}
-            />
-          }
-          placeholder="Search..."
-          style={{
-            width: 200,
-            background: 'rgba(255, 255, 255, 0.2)',
-            color: 'white',
-            border: 'none',
-          }}
-        />
-        <Button
-          type="primary"
-          icon={<LoginOutlined />}
-          onClick={() => {
-            setActive('login');
-            navigate('/login');
-          }}
-          style={{
-            backgroundColor:
-              active === 'login' ? '#ff6b81' : 'transparent',
-            borderColor: '#ff6b81',
-            color: active === 'login' ? 'white' : '#ff6b81',
-          }}
-        >
-          Login
-        </Button>
-        <Button
-          onClick={() => {
-            setActive('register');
-            navigate('/register');
-          }}
-          style={{
-            backgroundColor:
-              active === 'register' ? '#ff6b81' : 'transparent',
-            borderColor: '#ff6b81',
-            color: active === 'register' ? 'white' : '#ff6b81',
-          }}
-        >
-          Register
-        </Button>
-      </Space>
-    </Header>
+    <nav className="bg-[#5B4959] text-white p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link to="/" className="text-2xl font-bold">
+          Melodies
+        </Link>
+        <div className="flex items-center">
+          {!isAuthenticated ? (
+            <>
+              <Link to="/login">
+                <Button type="text" className="text-white hover:text-gray-300">
+                  Login
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button type="text" className="text-white hover:text-gray-300">
+                  Register
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <UserMenu />
+          )}
+        </div>
+      </div>
+    </nav>
   );
 };
 

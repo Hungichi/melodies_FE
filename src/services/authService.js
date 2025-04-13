@@ -1,55 +1,81 @@
-import axios from 'axios';
+import axios from '../config/axios';
 
 const API_URL = 'http://localhost:5000/api';
 
+let currentUser = null;
+
 const authService = {
   // Đăng ký
-  register: async (userData) => {
+  async register(userData) {
     try {
-      const response = await axios.post(`${API_URL}/auth/register`, userData);
+      const response = await axios.post('/api/auth/register', userData);
       if (response.data.success) {
-        // Lưu token vào localStorage
-        localStorage.setItem('token', response.data.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.data));
-        return response.data;
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        currentUser = response.data.user;
+        window.dispatchEvent(new Event('authChange'));
       }
-      throw new Error(response.data.message);
+      return response.data;
     } catch (error) {
-      throw error.response?.data || error.message;
+      throw error.response?.data || error;
     }
   },
 
   // Đăng nhập
-  login: async (credentials) => {
+  async login(credentials) {
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, credentials);
+      const response = await axios.post('/api/auth/login', credentials);
       if (response.data.success) {
-        // Lưu token vào localStorage
-        localStorage.setItem('token', response.data.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.data));
-        return response.data;
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        currentUser = response.data.user;
+        window.dispatchEvent(new Event('authChange'));
       }
-      throw new Error(response.data.message);
+      return response.data;
     } catch (error) {
-      throw error.response?.data || error.message;
+      throw error.response?.data || error;
     }
   },
 
   // Đăng xuất
-  logout: () => {
+  logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    currentUser = null;
+    window.dispatchEvent(new Event('authChange'));
   },
 
   // Lấy thông tin user hiện tại
-  getCurrentUser: () => {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+  async getCurrentUser() {
+    const response = await axios.get('/api/auth/me');
+    return response.data;
   },
 
   // Kiểm tra đã đăng nhập chưa
-  isAuthenticated: () => {
-    return !!localStorage.getItem('token');
+  isAuthenticated() {
+    const token = localStorage.getItem('token');
+    return !!token;
+  },
+
+  getToken() {
+    return localStorage.getItem('token');
+  },
+
+  // Update profile
+  async updateProfile(userData) {
+    const response = await axios.put('/api/auth/profile', userData);
+    if (response.data.success) {
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      currentUser = response.data.user;
+      window.dispatchEvent(new Event('authChange'));
+    }
+    return response.data;
+  },
+
+  // Get stored user data
+  getStoredUser() {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
   }
 };
 

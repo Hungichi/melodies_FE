@@ -7,7 +7,6 @@ import * as Yup from "yup";
 const { Title, Text } = Typography;
 
 const Register = () => {
-
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -44,7 +43,7 @@ const Register = () => {
       }, 2000);
     } catch (error) {
       message.error({
-        content: error.message || 'Registration failed. Please try again.',
+        content: error.response?.data?.message || 'Registration failed. Please try again.',
         duration: 3,
         style: {
           marginTop: '20vh',
