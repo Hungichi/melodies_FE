@@ -1,0 +1,25 @@
+.neon-search:hover,
+.neon-search:focus-within {
+    border-color: #ff69b4;
+    box-shadow:
+        0 0 5px #ff69b4,
+        0 0 10px #ff69b4,
+        0 0 20px rgba(255, 105, 180, 0.4);
+}
+
+.dropdown-menu {
+    background-color: #6a536b !important;
+    color: white !important;
+    border-radius: 10px;
+}
+.dropdown-menu .ant-dropdown-menu {
+    background-color: transparent !important;
+    color: inherit;
+    box-shadow: none;
+}
+.dropdown-menu .ant-dropdown-menu-item {
+    color: white !important;
+    transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
+}

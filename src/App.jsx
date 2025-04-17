@@ -35,10 +35,19 @@ function App() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/profile" element={<Profile />} />
-                            <Route path="/discover" element={<DiscoverPage />} />
+                            <Route
+                                path="/discover"
+                                element={<DiscoverPage />}
+                            />
                             <Route path="/album" element={<Album />} />
-                            <Route path="/artist" element={<ArtistProfileForm/>} />
-                            <Route path="/artist-registration" element={<ArtistRegistration />} />
+                            <Route
+                                path="/artist"
+                                element={<ArtistProfileForm />}
+                            />
+                            <Route
+                                path="/artist-registration"
+                                element={<ArtistRegistration />}
+                            />
                         </Routes>
                     </Content>
                     <AppFooter />

@@ -67,10 +67,10 @@ function Sidebar({ collapsed, setCollapsed }) {
                 <Menu.Item key="2" icon={<PlayCircleOutlined />}>
                     <Link to="/discover">Discover</Link>
                 </Menu.Item>
-                <Menu.Item key="3" icon={< BookOutlined />}>
+                <Menu.Item key="3" icon={<BookOutlined />}>
                     <Link to="/album">Album</Link>
                 </Menu.Item>
-                <Menu.Item key="4" icon={< BookOutlined />}>
+                <Menu.Item key="4" icon={<BookOutlined />}>
                     <Link to="/artist">Artist</Link>
                 </Menu.Item>
             </Menu>

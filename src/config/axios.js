@@ -1,98 +1,71 @@
-import axios from 'axios'
-import { API_URL } from '../constant'
+import axios from 'axios';
+import { API_URL } from '../constant/index';
+import { logout, setToken as updateToken } from '../store/slice/authSlice';
+import { store } from '../store/store';
 
 const config = {
     baseURL: API_URL,
     timeout: 30000,
-}
+};
 
-const api = axios.create(config)
+const api = axios.create(config);
 
-// Function to get token from localStorage
-const getLocalToken = () => localStorage.getItem('token')
-const getLocalRefreshToken = () => localStorage.getItem('refreshToken')
+const getReduxToken = () => store.getState().auth.token;
+const getReduxRefreshToken = () => store.getState().auth.refreshToken;
 
-// Function to set token in localStorage
-const setToken = (token) => {
-    localStorage.setItem('token', token)
-}
-
-// Function to refresh token using GET request
 const refreshToken = async () => {
     try {
-  
         const response = await axios.get(`${API_URL}identity/refresh`, {
             headers: {
-                Authorization: `Bearer ${getLocalRefreshToken()}`,
+                Authorization: `Bearer ${getReduxRefreshToken()}`,
             },
-        })
-        setToken(response.data.token)
+        });
 
-        return response.data.token
+        const newToken = response.data.token;
+        store.dispatch(updateToken(newToken)); // Update Redux state with new token
+        return newToken;
     } catch (error) {
-        console.error('Token refresh failed:', error)
-        localStorage.removeItem('token')
-        localStorage.removeItem('refreshToken')
-        window.location.assign('/sign-in')
-        return Promise.reject(error)
+        console.error('Token refresh failed:', error);
+        store.dispatch(logout()); // Clear Redux state and persist
+        window.location.assign('/login');
+        return Promise.reject(error);
     }
-}
+};
 
-// Request interceptor to add token to headers
-const handleRequest = (config) => {
-    const token = getLocalToken()
+api.interceptors.request.use((config) => {
+    const token = getReduxToken();
     if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`
+        config.headers['Authorization'] = `Bearer ${token}`;
     }
-    return config
-}
+    return config;
+}, Promise.reject);
 
-// Request error handler
-const handleRequestError = (error) => {
-    return Promise.reject(error)
-}
+api.interceptors.response.use(
+    (res) => res,
+    async (error) => {
+        const originalRequest = error.config;
 
-// Response handler
-const handleResponse = (response) => {
-    return response
-}
+        if (error.response?.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
 
-// Response error handler
-const handleResponseError = async (error) => {
-    const originalRequest = error.config
-
-    // Check if the error is due to an expired token and if the request has not been retried
-    if (
-        error.response &&
-        error.response.status === 401 &&
-        !originalRequest._retry
-    ) {
-        originalRequest._retry = true
-
-        try {
-            const newToken = await refreshToken()
-            api.defaults.headers.common['Authorization'] = `Bearer ${newToken}`
-            originalRequest.headers['Authorization'] = `Bearer ${newToken}`
-            return api(originalRequest)
-        } catch (refreshError) {
-            console.error(
-                'Retrying request failed after token refresh:',
-                refreshError,
-            )
-            return Promise.reject(refreshError)
+            try {
+                const newToken = await refreshToken();
+                api.defaults.headers.common['Authorization'] =
+                    `Bearer ${newToken}`;
+                originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+                return api(originalRequest);
+            } catch (refreshError) {
+                return Promise.reject(refreshError);
+            }
         }
+
+        if (error.response?.status === 401) {
+            store.dispatch(logout());
+            window.location.assign('/sign-in');
+        }
+
+        return Promise.reject(error);
     }
+);
 
-    // Handle unauthorized access
-    if (error.response && error.response.status === 401) {
-        console.warn('Unauthorized access, redirecting to login...')
-        window.location.assign('/sign-in')
-    }
-
-    return Promise.reject(error)
-}
-
-api.interceptors.request.use(handleRequest, handleRequestError)
-api.interceptors.response.use(handleResponse, handleResponseError)
-
-export default api
+export default api;

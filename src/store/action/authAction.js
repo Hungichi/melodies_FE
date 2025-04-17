@@ -1,10 +1,14 @@
-import axios from 'axios';
-import { API_URL } from '../constant'; // Make sure you define the API_URL
-
-// Function to register a new user
-const registerUser = async (username, email, password, confirmPassword) => {
+import api from '../../config/axios';
+import { setRefreshToken, setToken, setUser } from '../slice/authSlice';
+import { store } from '../store';
+export const registerUser = async (
+    username,
+    email,
+    password,
+    confirmPassword
+) => {
     try {
-        const response = await axios.post(`${API_URL}/api/auth/register`, {
+        const response = await api.post('/api/auth/register', {
             username,
             email,
             password,
@@ -12,8 +16,12 @@ const registerUser = async (username, email, password, confirmPassword) => {
         });
 
         if (response.data.success) {
-            localStorage.setItem('token', response.data.token);
-            return response.data.user;
+            const { token, refreshToken, user } = response.data;
+            // Store the token and refreshToken in Redux
+            if (token) store.dispatch(setToken(token));
+            if (refreshToken) store.dispatch(setRefreshToken(refreshToken));
+
+            return user;
         } else {
             throw new Error(response.data.message);
         }
@@ -22,5 +30,25 @@ const registerUser = async (username, email, password, confirmPassword) => {
         throw error;
     }
 };
+export const loginUser = async (email, password) => {
+    try {
+        const response = await api.post('/api/auth/login', {
+            email,
+            password,
+        });
 
-export default registerUser;
+        if (response.data.success) {
+            const { token, refreshToken, user } = response.data;
+
+            if (token) store.dispatch(setToken(token));
+            if (refreshToken) store.dispatch(setRefreshToken(refreshToken));
+
+            return user;
+        } else {
+            throw new Error(response.data.message);
+        }
+    } catch (error) {
+        console.error('Login failed:', error);
+        throw error;
+    }
+};
