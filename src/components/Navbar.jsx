@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Button, Dropdown, Input, Menu, Spin, Typography } from 'antd';
+import { Avatar, Button, Dropdown, Input, Spin, Typography } from 'antd';
 import {
     LogoutOutlined,
     SearchOutlined,
@@ -18,12 +18,10 @@ const Navbar = () => {
     const navigate = useNavigate();
     const { user, status, error } = useSelector((state) => state.auth);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    useEffect(() => {
-        dispatch(fetchCurrentUserProfile());
-    }, [dispatch]);
 
     useEffect(() => {
-        setIsLoggedIn(!!user);
+        if (user) setIsLoggedIn(true);
+        else setIsLoggedIn(false);
     }, [user]);
 
     const handleLogout = () => {
@@ -38,24 +36,20 @@ const Navbar = () => {
         console.log('Search value:', value);
     };
 
-    const menu = (
-        <Menu>
-            <Menu.Item
-                key="1"
-                icon={<UserOutlined />}
-                onClick={handleProfileClick}
-            >
-                Profile
-            </Menu.Item>
-            <Menu.Item
-                key="2"
-                icon={<LogoutOutlined />}
-                onClick={handleLogout}
-            >
-                Logout
-            </Menu.Item>
-        </Menu>
-    );
+    const dropdownItems = [
+        {
+            key: 'profile',
+            icon: <UserOutlined />,
+            label: 'Profile',
+            onClick: handleProfileClick,
+        },
+        {
+            key: 'logout',
+            icon: <LogoutOutlined />,
+            label: 'Logout',
+            onClick: handleLogout,
+        },
+    ];
 
     if (status === 'loading') {
         return (
@@ -78,16 +72,12 @@ const Navbar = () => {
                     allowClear
                     onSearch={handleSearch}
                     style={{
-                        marginLeft: 10,
-                        width: 250,
-                        borderRadius: 20,
-                        backgroundColor: '#fff',
-                        border: '1px solid #ccc',
-                        paddingLeft: 12,
-                        transition: 'all 0.3s ease',
+                        width: 280,
+                       
                     }}
                     className="neon-search"
                 />
+
                 <div className="flex items-center">
                     {!isLoggedIn ? (
                         <>
@@ -110,9 +100,9 @@ const Navbar = () => {
                         </>
                     ) : (
                         <Dropdown
-                            overlay={menu}
+                            menu={{ items: dropdownItems }}
                             trigger={['hover']}
-                            overlayClassName="dropdown-menu"
+                            className="dropdown-menu"
                         >
                             <Button
                                 type="text"
@@ -120,8 +110,7 @@ const Navbar = () => {
                                 style={{
                                     backgroundColor: '#e835c2',
                                     border: '1px solid rgba(255, 255, 255, 0.4)',
-                                    boxShadow:
-                                        '0 0 8px rgba(255, 105, 180, 0.6)',
+                                    boxShadow: '0 0 8px rgba(255, 105, 180, 0.6)',
                                 }}
                             >
                                 <Avatar src={user?.avatar} size="small" />

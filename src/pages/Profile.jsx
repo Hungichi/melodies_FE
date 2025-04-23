@@ -10,24 +10,31 @@ import {
   Avatar,
   Upload,
 } from 'antd';
-import { useSelector } from 'react-redux';
-import { updateUserProfile } from '../store/action/userAction';
+import { fetchCurrentUserProfile, updateUserProfile } from '../store/action/userAction';
 import moment from 'moment';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import api from '../config/axios';
-import staticMethods from 'antd/es/message';
 
 const Profile = () => {
-  const user = useSelector((state) => state.auth.user);
-  const userDetail = useSelector((state) => state.userProfile.profile)
-  console.log(userDetail);
-
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [profileImage, setProfileImage] = useState(null);
   const [fileList, setFileList] = useState([]);
+
+  useEffect(() => {
+    const fetchUserDetail = async () => {
+      try {
+        const res = await fetchCurrentUserProfile();
+        setUser(res);
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+
+    fetchUserDetail();
+  }, []);
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required('Full name is required'),
@@ -50,8 +57,8 @@ const Profile = () => {
 
       const response = await updateUserProfile(payload);
 
-      if (response?.success) {
-        message.success('Profile updated successfully');
+      if (response?.userDetails) {
+        message.success(response?.message);
       } else {
         throw new Error(response?.message || 'Failed to update profile');
       }
@@ -62,7 +69,7 @@ const Profile = () => {
     }
   };
 
-  const handleImageChange = async ({ file, fileList }) => {
+  const handleImageChange = async ({ file }) => {
     if (file && file.type.startsWith('image/')) {
       setFileList([file]);
       try {
@@ -93,7 +100,11 @@ const Profile = () => {
 
   const previewImageUrl = profileImage
     ? profileImage.url
-    : user?.details?.profileImage || user?.profileImage || '/default-avatar.png';
+    : user?.profileImage || '/default-avatar.png';
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div style={{ maxWidth: 600, margin: '0 auto', color: 'white' }}>
@@ -107,10 +118,10 @@ const Profile = () => {
 
       <Formik
         initialValues={{
-          fullName: user.fullName,
-          dateOfBirth: user.dateOfBirth ? moment(user.dateOfBirth) : null,
-          location: user.location,
-          bio: user.bio,
+          fullName: user?.fullName,
+          dateOfBirth: user?.dateOfBirth ? moment(user?.dateOfBirth) : null,
+          location: user?.location,
+          bio: user?.bio,
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}

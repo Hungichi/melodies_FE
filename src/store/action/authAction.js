@@ -1,12 +1,8 @@
 import api from '../../config/axios';
-import { setRefreshToken, setToken, setUser } from '../slice/authSlice';
+import { setToken, setUser } from '../slice/authSlice';
 import { store } from '../store';
-export const registerUser = async (
-    username,
-    email,
-    password,
-    confirmPassword
-) => {
+
+export const registerUser = async (username, email, password, confirmPassword) => {
     try {
         const response = await api.post('/api/auth/register', {
             username,
@@ -16,10 +12,8 @@ export const registerUser = async (
         });
 
         if (response.data.success) {
-            const { token, refreshToken, user } = response.data;
-            // Store the token and refreshToken in Redux
+            const { token, user } = response.data;
             if (token) store.dispatch(setToken(token));
-            if (refreshToken) store.dispatch(setRefreshToken(refreshToken));
 
             return user;
         } else {
@@ -27,9 +21,10 @@ export const registerUser = async (
         }
     } catch (error) {
         console.error('Registration failed:', error);
-        throw error;
+        throw new Error(error.response?.data?.message || error.message || 'Registration failed');
     }
 };
+
 export const loginUser = async (email, password) => {
     try {
         const response = await api.post('/api/auth/login', {
@@ -37,18 +32,15 @@ export const loginUser = async (email, password) => {
             password,
         });
 
-        if (response.data.success) {
-            const { token, refreshToken, user } = response.data;
-
+        const { success, token, user } = response.data;
+        if (success) {
             if (token) store.dispatch(setToken(token));
-            if (refreshToken) store.dispatch(setRefreshToken(refreshToken));
-
-            return user;
-        } else {
-            throw new Error(response.data.message);
+            store.dispatch(setUser(user));
         }
+
+        return  user;
     } catch (error) {
         console.error('Login failed:', error);
-        throw error;
+        throw new Error(error.response?.data?.message || error.message || 'Login failed');
     }
 };

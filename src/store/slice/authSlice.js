@@ -16,9 +16,6 @@ const authSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
     },
-    setRefreshToken: (state, action) => {
-      state.refreshToken = action.payload;
-    },
     setUser: (state, action) => {
       state.user = action.payload;
       state.status = 'succeeded';

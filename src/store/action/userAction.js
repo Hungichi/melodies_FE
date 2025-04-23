@@ -1,5 +1,5 @@
 import api from '../../config/axios';
-import { setUserProfile, setUserProfileError, setUserProfileLoading } from '../slice/userProfileSlice';
+import { setUserProfile, setUserProfileError } from '../slice/userProfileSlice';
 export const updateUserProfile = async (formValues) => {
     try {
         const res = await api.put('/api/auth/update-profile', {
@@ -18,13 +18,15 @@ export const updateUserProfile = async (formValues) => {
     }
 };
 
-export const fetchCurrentUserProfile = () => async (dispatch) => {
-    dispatch(setUserProfileLoading());
+export const fetchCurrentUserProfile = async () => {
     try {
         const res = await api.get('/api/auth/me');
-        console.log(res.data.user)
-        dispatch(setUserProfile(res.data.user));
+        const { success, user } = res.data
+        if (success) {
+            setUserProfile(user)
+        }
+        return user
     } catch (err) {
-        dispatch(setUserProfileError(err.response?.data?.message || 'Failed to fetch profile data'));
+        setUserProfileError(err.response?.data?.message || 'Failed to fetch profile data');
     }
 };

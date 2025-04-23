@@ -1,9 +1,6 @@
 import { Layout, Menu } from 'antd';
 import {
     HomeOutlined,
-    LoginOutlined,
-    UserAddOutlined,
-    UserOutlined,
     PlayCircleOutlined,
     BookOutlined,
 } from '@ant-design/icons';
@@ -17,7 +14,7 @@ function Sidebar({ collapsed, setCollapsed }) {
         <Sider
             collapsible
             collapsed={collapsed}
-            trigger={null}
+            onCollapse={setCollapsed}
             style={{
                 position: 'fixed',
                 left: 0,

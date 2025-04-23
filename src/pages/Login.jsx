@@ -37,9 +37,11 @@ const Login = () => {
     });
     const handleSubmit = async (values) => {
         try {
-            await loginUser(values.email, values.password);
-
-            navigate('/');
+            const user = await loginUser(values.email, values.password);
+            console.log(user)
+            if (user) {
+                navigate('/');
+            }
         } catch (error) {
             message.error(
                 'Login failed. Please check your credentials and try again.'
@@ -98,7 +100,7 @@ const Login = () => {
                 <Formik
                     initialValues={{ email: '', password: '' }}
                     validationSchema={validationSchema}
-                    onSubmit={handleSubmit} // The form submission will now trigger handleSubmit
+                    onSubmit={handleSubmit} 
                 >
                     {({ handleSubmit }) => (
                         <Form
