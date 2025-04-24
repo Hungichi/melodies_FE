@@ -39,7 +39,9 @@ const Login = () => {
         try {
             const user = await loginUser(values.email, values.password);
             console.log(user)
-            if (user) {
+            if (user?.role == 'admin') {
+                navigate('/admin');
+            } else {
                 navigate('/');
             }
         } catch (error) {
@@ -100,7 +102,7 @@ const Login = () => {
                 <Formik
                     initialValues={{ email: '', password: '' }}
                     validationSchema={validationSchema}
-                    onSubmit={handleSubmit} 
+                    onSubmit={handleSubmit}
                 >
                     {({ handleSubmit }) => (
                         <Form

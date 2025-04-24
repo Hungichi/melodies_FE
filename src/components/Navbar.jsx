@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Button, Dropdown, Input, Spin, Typography } from 'antd';
+import { Avatar, Button, Dropdown, Input, Popconfirm, Space, Spin, Typography } from 'antd';
 import {
+    CheckCircleTwoTone,
+    ExclamationCircleOutlined,
     LogoutOutlined,
     SearchOutlined,
+    UserAddOutlined,
     UserOutlined,
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/slice/authSlice';
 import '../assets/css/navbar.css';
-import { fetchCurrentUserProfile } from '../store/action/userAction';
 
 const { Text } = Typography;
 
@@ -26,6 +28,7 @@ const Navbar = () => {
 
     const handleLogout = () => {
         dispatch(logout());
+        navigate('/login')
     };
 
     const handleProfileClick = () => {
@@ -73,53 +76,78 @@ const Navbar = () => {
                     onSearch={handleSearch}
                     style={{
                         width: 280,
-                       
+
                     }}
                     className="neon-search"
                 />
 
                 <div className="flex items-center">
-                    {!isLoggedIn ? (
-                        <>
-                            <Link to="/login">
-                                <Button
-                                    type="text"
-                                    className="text-white hover:text-gray-300"
+
+                    <Space>
+                        {!isLoggedIn ? (
+                            <>
+
+
+
+                                <Link to="/login">
+                                    <Button
+                                        type="text"
+                                        className="text-white hover:text-gray-300"
+                                    >
+                                        Login
+                                    </Button>
+                                </Link>
+                                <Link to="/register">
+                                    <Button
+                                        type="text"
+                                        className="text-white hover:text-gray-300"
+                                    >
+                                        Register
+                                    </Button>
+                                </Link>
+                            </>
+                        ) : (
+                            <>
+                                <Popconfirm
+                                    title="Are you sure you want to request an artist?"
+                                    icon={<ExclamationCircleOutlined style={{ color: '#faad14' }} />}
+                                    onConfirm={() => navigate('/artist-registration')}
+                                    okText="Yes"
+                                    cancelText="No"
                                 >
-                                    Login
-                                </Button>
-                            </Link>
-                            <Link to="/register">
-                                <Button
-                                    type="text"
-                                    className="text-white hover:text-gray-300"
+                                    <Button
+                                        type="primary"
+                                        style={{
+                                            backgroundColor: '#e835c2',
+                                            border: '1px solid rgba(255, 255, 255, 0.4)',
+                                            boxShadow: '0 0 8px rgba(255, 105, 180, 0.6)',
+                                        }}
+                                    >
+                                        < UserAddOutlined />  Request Artist
+                                    </Button>
+                                </Popconfirm>
+                                <Dropdown
+                                    menu={{ items: dropdownItems }}
+                                    trigger={['hover']}
+                                    className="dropdown-menu"
                                 >
-                                    Register
-                                </Button>
-                            </Link>
-                        </>
-                    ) : (
-                        <Dropdown
-                            menu={{ items: dropdownItems }}
-                            trigger={['hover']}
-                            className="dropdown-menu"
-                        >
-                            <Button
-                                type="text"
-                                className="flex items-center rounded-full px-3 py-1 shadow-md hover:shadow-lg transition-all"
-                                style={{
-                                    backgroundColor: '#e835c2',
-                                    border: '1px solid rgba(255, 255, 255, 0.4)',
-                                    boxShadow: '0 0 8px rgba(255, 105, 180, 0.6)',
-                                }}
-                            >
-                                <Avatar src={user?.avatar} size="small" />
-                                <Text style={{ color: 'white', marginLeft: 8 }}>
-                                    {user?.username}
-                                </Text>
-                            </Button>
-                        </Dropdown>
-                    )}
+                                    <Button
+                                        type="text"
+                                        className="flex items-center rounded-full px-3 py-1 shadow-md hover:shadow-lg transition-all"
+                                        style={{
+                                            backgroundColor: '#e835c2',
+                                            border: '1px solid rgba(255, 255, 255, 0.4)',
+                                            boxShadow: '0 0 8px rgba(255, 105, 180, 0.6)',
+                                        }}
+                                    >
+                                        <Text style={{ color: 'white', marginLeft: 8 }}>
+                                            <UserOutlined /> {user?.username}
+                                        </Text>
+                                    </Button>
+                                </Dropdown>
+                            </>
+                        )}
+                    </Space>
                 </div>
             </div>
         </nav>

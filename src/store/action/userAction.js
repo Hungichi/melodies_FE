@@ -2,7 +2,7 @@ import api from '../../config/axios';
 import { setUserProfile, setUserProfileError } from '../slice/userProfileSlice';
 export const updateUserProfile = async (formValues) => {
     try {
-        const res = await api.put('/api/auth/update-profile', {
+        const res = await api.put('/api/auth/profile', {
             userId: formValues.userId,
             fullName: formValues.fullName,
             dateOfBirth: formValues.dateOfBirth,
@@ -10,8 +10,11 @@ export const updateUserProfile = async (formValues) => {
             location: formValues.location,
             profileImage: formValues.profileImage,
         });
-
-        return res.data;
+        const { success, user } = res.data
+        if (success) {
+            setUserProfile(user)
+        }
+        return user;
     } catch (err) {
         console.error('Update profile error:', err);
         throw err.response?.data || { message: 'Unknown error occurred' };

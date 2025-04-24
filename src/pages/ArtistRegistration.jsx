@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Upload, message, Card } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../config/axios';
 
 const { TextArea } = Input;
 
@@ -16,22 +16,20 @@ const ArtistRegistration = () => {
         try {
             setLoading(true);
             const formData = new FormData();
-            formData.append('artistName', values.artistName);
+            formData.append('stageName', values.artistName);
             formData.append('email', values.email);
             formData.append('phone', values.phone);
-            formData.append('shortDescription', values.shortDescription);
-            formData.append('biography', values.biography);
+            formData.append('bio', values.biography);
             if (imageFile) {
                 formData.append('profileImage', imageFile);
             }
 
-            const response = await axios.post(
-                'http://localhost:5000/api/artist-requests',
+            const response = await api.post(
+                '/api/artist-requests',
                 formData,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
                     },
                 }
             );
@@ -41,7 +39,7 @@ const ArtistRegistration = () => {
                     'Đăng ký thành công! Yêu cầu của bạn đang được xem xét.'
                 );
                 navigate('/');
-            }
+            } 
         } catch (error) {
             message.error(
                 error.response?.data?.message || 'Có lỗi xảy ra khi đăng ký'
@@ -127,25 +125,6 @@ const ArtistRegistration = () => {
                         ]}
                     >
                         <Input className="bg-[#2A1D25] text-white border-[#5B4959]" />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="shortDescription"
-                        label={
-                            <span className="text-white">
-                                Mô tả ngắn về nghệ sĩ
-                            </span>
-                        }
-                        rules={[
-                            { required: true, message: 'Vui lòng nhập mô tả' },
-                        ]}
-                    >
-                        <TextArea
-                            className="bg-[#2A1D25] text-white border-[#5B4959]"
-                            showCount
-                            maxLength={500}
-                            rows={4}
-                        />
                     </Form.Item>
 
                     <Form.Item
