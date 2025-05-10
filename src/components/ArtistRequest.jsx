@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { getAllArtistRequest, changeArtistRequestStatus } from '../store/action/adminAction';
-import { Table, Avatar, Button, Tag, Space, message, Typography, Card } from 'antd';
+import {
+    getAllArtistRequest,
+    changeArtistRequestStatus,
+} from '../store/action/adminAction';
+import {
+    Table,
+    Avatar,
+    Button,
+    Tag,
+    Space,
+    message,
+    Typography,
+    Card,
+} from 'antd';
 
 const { Title } = Typography;
 
@@ -32,7 +44,13 @@ const ArtistRequest = () => {
                 // Update the status and other details in the table after confirming
                 setRequests((prevRequests) =>
                     prevRequests.map((request) =>
-                        request._id === id ? { ...request, status: response.data.status, ...response.data } : request
+                        request._id === id
+                            ? {
+                                  ...request,
+                                  status: response.data.status,
+                                  ...response.data,
+                              }
+                            : request
                     )
                 );
                 message.success(response.message); // Show success message
@@ -53,7 +71,13 @@ const ArtistRequest = () => {
                 // Update the status and other details in the table after rejecting
                 setRequests((prevRequests) =>
                     prevRequests.map((request) =>
-                        request._id === id ? { ...request, status: response.data.status, ...response.data } : request
+                        request._id === id
+                            ? {
+                                  ...request,
+                                  status: response.data.status,
+                                  ...response.data,
+                              }
+                            : request
                     )
                 );
                 message.warning(response.message); // Show success message
@@ -92,7 +116,15 @@ const ArtistRequest = () => {
             dataIndex: 'status',
             key: 'status',
             render: (status) => (
-                <Tag color={status === 'approved' ? 'green' : status === 'pending' ? 'orange' : 'red'}>
+                <Tag
+                    color={
+                        status === 'approved'
+                            ? 'green'
+                            : status === 'pending'
+                              ? 'orange'
+                              : 'red'
+                    }
+                >
                     {status.toUpperCase()}
                 </Tag>
             ),
@@ -124,7 +156,10 @@ const ArtistRequest = () => {
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Card style={{ width: '100%', maxWidth: 1200 }}>
-                <Title level={2} style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                <Title
+                    level={2}
+                    style={{ textAlign: 'center', marginBottom: '2rem' }}
+                >
                     Artist Requests
                 </Title>
                 <Table

@@ -30,7 +30,10 @@ function App() {
                     path="/*"
                     element={
                         <Layout style={{ minHeight: '100vh' }}>
-                            <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+                            <Sidebar
+                                collapsed={collapsed}
+                                setCollapsed={setCollapsed}
+                            />
                             <Layout
                                 style={{
                                     marginLeft: collapsed ? 80 : 200,
@@ -38,19 +41,45 @@ function App() {
                                 }}
                             >
                                 <Navbar />
-                                <Content style={{  background: '#412C3A' }}>
+                                <Content style={{ background: '#412C3A' }}>
                                     <Routes>
                                         <Route path="/" element={<Home />} />
-                                        <Route path="/login" element={<Login />} />
-                                        <Route path="/register" element={<Register />} />
-                                        <Route path="/profile" element={<Profile />} />
-                                        <Route path="/discover" element={<DiscoverPage />} />
-                                        <Route path="/album" element={<Album />} />
-                                        <Route path="/artist" element={<ArtistProfileForm />} />
-                                        <Route path="/artist-registration" element={<ArtistRegistration />} />
-                                        <Route path="/artist-dashboard" element={<ArtistDashboard />} />
-                                        <Route path="/song-detail/:id" element={<SongDetails />} />
-
+                                        <Route
+                                            path="/login"
+                                            element={<Login />}
+                                        />
+                                        <Route
+                                            path="/register"
+                                            element={<Register />}
+                                        />
+                                        <Route
+                                            path="/profile"
+                                            element={<Profile />}
+                                        />
+                                        <Route
+                                            path="/discover"
+                                            element={<DiscoverPage />}
+                                        />
+                                        <Route
+                                            path="/album"
+                                            element={<Album />}
+                                        />
+                                        <Route
+                                            path="/artist"
+                                            element={<ArtistProfileForm />}
+                                        />
+                                        <Route
+                                            path="/artist-registration"
+                                            element={<ArtistRegistration />}
+                                        />
+                                        <Route
+                                            path="/artist-dashboard"
+                                            element={<ArtistDashboard />}
+                                        />
+                                        <Route
+                                            path="/song-detail/:id"
+                                            element={<SongDetails />}
+                                        />
                                     </Routes>
                                 </Content>
                                 <AppFooter />
@@ -66,4 +95,4 @@ function App() {
         </Router>
     );
 }
-export default App
+export default App;

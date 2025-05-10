@@ -1,4 +1,4 @@
-import api from "../../config/axios";
+import api from '../../config/axios';
 
 export const createSongArtist = (formData) => {
     return api.post('/api/songs', formData, {
@@ -8,10 +8,16 @@ export const createSongArtist = (formData) => {
     });
 };
 
-export const getAllSongArtist = (page = 1, limit = 10, genre = '', search = '', sort = '-createdAt') => {
+export const getAllSongArtist = (
+    page = 1,
+    limit = 10,
+    genre = '',
+    search = '',
+    sort = '-createdAt'
+) => {
     return api
         .get('api/songs', {
-            params: { page, limit, genre, search, sort }
+            params: { page, limit, genre, search, sort },
         })
-        .then(res => res.data);
+        .then((res) => res.data);
 };

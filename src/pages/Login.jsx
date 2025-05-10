@@ -38,7 +38,7 @@ const Login = () => {
     const handleSubmit = async (values) => {
         try {
             const user = await loginUser(values.email, values.password);
-            console.log(user)
+            console.log(user);
             if (user?.role == 'admin') {
                 navigate('/admin/artist-request');
             } else {
@@ -59,7 +59,7 @@ const Login = () => {
                 alignItems: 'center',
                 minHeight: '100vh',
                 background: 'linear-gradient(135deg, #1a1221 0%, #2D1F31 100%)',
-                padding:28
+                padding: 28,
             }}
         >
             <Card

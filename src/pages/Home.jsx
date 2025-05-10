@@ -32,8 +32,6 @@ const { Header, Content } = Layout;
 const { Title, Text, Paragraph } = Typography;
 
 const Home = () => {
- 
-
     // const [isAuthenticated, setIsAuthenticated] = useState(authService.isAuthenticated());
 
     // useEffect(() => {

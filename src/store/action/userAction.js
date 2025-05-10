@@ -10,9 +10,9 @@ export const updateUserProfile = async (formValues) => {
             location: formValues.location,
             profileImage: formValues.profileImage,
         });
-        const { success, user } = res.data
+        const { success, user } = res.data;
         if (success) {
-            setUserProfile(user)
+            setUserProfile(user);
         }
         return user;
     } catch (err) {
@@ -24,17 +24,19 @@ export const updateUserProfile = async (formValues) => {
 export const fetchCurrentUserProfile = async () => {
     try {
         const res = await api.get('/api/auth/me');
-        const { success, user } = res.data
+        const { success, user } = res.data;
         if (success) {
-            setUserProfile(user)
+            setUserProfile(user);
         }
-        return user
+        return user;
     } catch (err) {
-        setUserProfileError(err.response?.data?.message || 'Failed to fetch profile data');
+        setUserProfileError(
+            err.response?.data?.message || 'Failed to fetch profile data'
+        );
     }
 };
 
 export const getSongDetail = async (id) => {
-    const response = api.get(`api/songs/${id}`)
-    return response
-}
+    const response = api.get(`api/songs/${id}`);
+    return response;
+};

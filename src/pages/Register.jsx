@@ -62,7 +62,7 @@ const Register = () => {
                 alignItems: 'center',
                 minHeight: '100vh',
                 background: 'linear-gradient(135deg, #1a1221 0%, #2D1F31 100%)',
-                padding:24
+                padding: 24,
             }}
         >
             <Card

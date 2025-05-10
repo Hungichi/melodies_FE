@@ -2,7 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSongDetail } from '../store/action/userAction';
 import { Button, Typography, Space, Tag, Badge, Spin } from 'antd';
-import { PlayCircleOutlined, HeartOutlined, MessageOutlined, EyeOutlined, PauseCircleOutlined } from '@ant-design/icons';
+import {
+    PlayCircleOutlined,
+    HeartOutlined,
+    MessageOutlined,
+    EyeOutlined,
+    PauseCircleOutlined,
+} from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
@@ -64,17 +70,30 @@ const SongDetails = () => {
                 </div>
 
                 <div>
-                    <Title level={1} className="!text-white text-4xl md:text-5xl font-bold">
+                    <Title
+                        level={1}
+                        className="!text-white text-4xl md:text-5xl font-bold"
+                    >
                         {songDetail.title}
                     </Title>
-                    <Text className="text-gray-300 text-lg">By {songDetail.artist.username}</Text>
+                    <Text className="text-gray-300 text-lg">
+                        By {songDetail.artist.username}
+                    </Text>
 
                     <div className="mt-4 flex flex-wrap items-center gap-3">
-                        <Badge color="pink" style={{ color: 'white' }} text={songDetail.genre} />
+                        <Badge
+                            color="pink"
+                            style={{ color: 'white' }}
+                            text={songDetail.genre}
+                        />
                         <Text className="text-gray-400">
-                            {new Date(songDetail.releaseDate).toLocaleDateString()}
+                            {new Date(
+                                songDetail.releaseDate
+                            ).toLocaleDateString()}
                         </Text>
-                        <Text className="text-gray-400">· {songDetail.duration}s</Text>
+                        <Text className="text-gray-400">
+                            · {songDetail.duration}s
+                        </Text>
                     </div>
 
                     <div className="mt-6 space-y-2 text-gray-300">
@@ -85,7 +104,8 @@ const SongDetails = () => {
                             <HeartOutlined /> {songDetail.likes.length} Likes
                         </div>
                         <div className="flex items-center gap-2">
-                            <MessageOutlined /> {songDetail.comments.length} Comments
+                            <MessageOutlined /> {songDetail.comments.length}{' '}
+                            Comments
                         </div>
                     </div>
 
@@ -97,7 +117,10 @@ const SongDetails = () => {
                             disabled={!isAudioReady}
                             onCanPlayThrough={handleAudioCanPlayThrough}
                         >
-                            <source src={songDetail.audioUrl} type="audio/mp3" />
+                            <source
+                                src={songDetail.audioUrl}
+                                type="audio/mp3"
+                            />
                             Your browser does not support the audio element.
                         </audio>
                     </div>
@@ -114,15 +137,11 @@ const SongDetails = () => {
                             )}
                             {isPlaying ? 'Pause' : 'Play'}
                         </button>
-                        <button
-                            className="bg-white text-black border-gray-400 rounded-full py-2 px-6 hover:bg-[#9B4C8B] hover:text-white active:bg-[#BB6AA6] active:text-white transition-colors"
-                        >
+                        <button className="bg-white text-black border-gray-400 rounded-full py-2 px-6 hover:bg-[#9B4C8B] hover:text-white active:bg-[#BB6AA6] active:text-white transition-colors">
                             <HeartOutlined className="mr-2" />
                             Like
                         </button>
-                        <button
-                            className="bg-white text-black border-gray-400 rounded-full py-2 px-6 hover:bg-[#9B4C8B] hover:text-white active:bg-[#BB6AA6] active:text-white transition-colors"
-                        >
+                        <button className="bg-white text-black border-gray-400 rounded-full py-2 px-6 hover:bg-[#9B4C8B] hover:text-white active:bg-[#BB6AA6] active:text-white transition-colors">
                             <MessageOutlined className="mr-2" />
                             Comment
                         </button>
@@ -130,10 +149,16 @@ const SongDetails = () => {
 
                     <div className="mt-6 text-gray-400 space-y-2">
                         <div>
-                            <strong>Release Date:</strong> {new Date(songDetail.releaseDate).toLocaleDateString()}
+                            <strong>Release Date:</strong>{' '}
+                            {new Date(
+                                songDetail.releaseDate
+                            ).toLocaleDateString()}
                         </div>
                         <div>
-                            <strong>Last Updated:</strong> {new Date(songDetail.updatedAt).toLocaleDateString()}
+                            <strong>Last Updated:</strong>{' '}
+                            {new Date(
+                                songDetail.updatedAt
+                            ).toLocaleDateString()}
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Button, Dropdown, Input, Popconfirm, Space, Spin, Typography } from 'antd';
+import {
+    Avatar,
+    Button,
+    Dropdown,
+    Input,
+    Popconfirm,
+    Space,
+    Spin,
+    Typography,
+} from 'antd';
 import {
     CheckCircleTwoTone,
     ExclamationCircleOutlined,
@@ -28,7 +37,7 @@ const Navbar = () => {
 
     const handleLogout = () => {
         dispatch(logout());
-        navigate('/login')
+        navigate('/login');
     };
 
     const handleProfileClick = () => {
@@ -52,7 +61,6 @@ const Navbar = () => {
             label: 'Logout',
             onClick: handleLogout,
         },
-
     ];
 
     if (status === 'loading') {
@@ -77,13 +85,11 @@ const Navbar = () => {
                     onSearch={handleSearch}
                     style={{
                         width: 280,
-
                     }}
                     className="neon-search"
                 />
 
                 <div className="flex items-center">
-
                     <Space>
                         {!isLoggedIn ? (
                             <>
@@ -106,12 +112,17 @@ const Navbar = () => {
                             </>
                         ) : (
                             <>
-
                                 {user?.role !== 'artist' ? (
                                     <Popconfirm
                                         title="Are you sure you want to request an artist?"
-                                        icon={<ExclamationCircleOutlined style={{ color: '#faad14' }} />}
-                                        onConfirm={() => navigate('/artist-registration')}
+                                        icon={
+                                            <ExclamationCircleOutlined
+                                                style={{ color: '#faad14' }}
+                                            />
+                                        }
+                                        onConfirm={() =>
+                                            navigate('/artist-registration')
+                                        }
                                         okText="Yes"
                                         cancelText="No"
                                     >
@@ -120,7 +131,8 @@ const Navbar = () => {
                                             style={{
                                                 backgroundColor: '#e835c2',
                                                 border: '1px solid rgba(255, 255, 255, 0.4)',
-                                                boxShadow: '0 0 8px rgba(255, 105, 180, 0.6)',
+                                                boxShadow:
+                                                    '0 0 8px rgba(255, 105, 180, 0.6)',
                                             }}
                                             icon={<UserAddOutlined />}
                                         >
@@ -130,11 +142,15 @@ const Navbar = () => {
                                 ) : (
                                     <Button
                                         type="primary"
-                                        onClick={() => navigate('/artist-dashboard')}
+                                        onClick={() =>
+                                            navigate('/artist-dashboard')
+                                        }
                                         style={{
-                                            background: 'linear-gradient(135deg, #6e44ff, #b892ff)',
+                                            background:
+                                                'linear-gradient(135deg, #6e44ff, #b892ff)',
                                             border: '1px solid rgba(255, 255, 255, 0.4)',
-                                            boxShadow: '0 0 8px rgba(91, 140, 0, 0.6)',
+                                            boxShadow:
+                                                '0 0 8px rgba(91, 140, 0, 0.6)',
                                         }}
                                         icon={<UserOutlined />}
                                     >
@@ -153,10 +169,16 @@ const Navbar = () => {
                                         style={{
                                             backgroundColor: '#e835c2',
                                             border: '1px solid rgba(255, 255, 255, 0.4)',
-                                            boxShadow: '0 0 8px rgba(255, 105, 180, 0.6)',
+                                            boxShadow:
+                                                '0 0 8px rgba(255, 105, 180, 0.6)',
                                         }}
                                     >
-                                        <Text style={{ color: 'white', marginLeft: 8 }}>
+                                        <Text
+                                            style={{
+                                                color: 'white',
+                                                marginLeft: 8,
+                                            }}
+                                        >
                                             <UserOutlined /> {user?.username}
                                         </Text>
                                     </Button>

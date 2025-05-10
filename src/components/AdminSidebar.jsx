@@ -23,7 +23,7 @@ const AdminSidebar = () => {
 
     if (!user) {
         navigate('/login');
-        return null; 
+        return null;
     }
 
     const handleLogout = async () => {
@@ -32,7 +32,10 @@ const AdminSidebar = () => {
     };
 
     return (
-        <Sider width={250} style={{ background: '#5B4959', minHeight: '100vh' }}>
+        <Sider
+            width={250}
+            style={{ background: '#5B4959', minHeight: '100vh' }}
+        >
             <div
                 style={{
                     color: '#fff',

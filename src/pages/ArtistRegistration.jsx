@@ -24,22 +24,18 @@ const ArtistRegistration = () => {
                 formData.append('profileImage', imageFile);
             }
 
-            const response = await api.post(
-                '/api/artist-requests',
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                }
-            );
+            const response = await api.post('/api/artist-requests', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
 
             if (response.data.success) {
                 message.success(
                     'Đăng ký thành công! Yêu cầu của bạn đang được xem xét.'
                 );
                 navigate('/');
-            } 
+            }
         } catch (error) {
             message.error(
                 error.response?.data?.message || 'Có lỗi xảy ra khi đăng ký'
