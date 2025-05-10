@@ -77,6 +77,9 @@ function Sidebar({ collapsed, setCollapsed }) {
                 <Menu.Item key="5" icon={< LoadingOutlined />}>
                     <Link to="/upload">Upload Music</Link>
                 </Menu.Item>
+                <Menu.Item key="6" icon={< BookOutlined />}>
+                    <Link to="/playlist">Playlist</Link>
+                </Menu.Item>
             </Menu>
         </Sider>
     );

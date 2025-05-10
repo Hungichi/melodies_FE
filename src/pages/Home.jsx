@@ -307,7 +307,11 @@ const Home = () => {
           <img
             src={currentSong.cover || "/placeholder.svg"}
             alt={currentSong.title}
-            style={{ width: 50, height: 50, borderRadius: 4, marginRight: 10 }}
+            onError={(e) => {
+              e.target.onerror = null
+              e.target.src = "https://placehold.co/400x400/3d2a3a/white?text=No+Image"
+            }}
+            style={{ width: 50, height: 50, borderRadius: 4, marginRight: 10, objectFit: "cover" }}
           />
           <div>
             <div style={{ color: "white", fontWeight: "bold" }}>{currentSong.title}</div>
@@ -414,7 +418,17 @@ const Home = () => {
                 <Col xs={24} sm={12} md={6} key={song.id}>
                   <Card
                     hoverable
-                    cover={<img alt={song.title} src={song.cover || "/placeholder.svg"} />}
+                    cover={
+                      <img
+                        alt={song.title}
+                        src={song.cover || "/placeholder.svg"}
+                        onError={(e) => {
+                          e.target.onerror = null
+                          e.target.src = "https://placehold.co/400x400/3d2a3a/white?text=No+Image"
+                        }}
+                        style={{ width: "100%", height: "200px", objectFit: "cover" }}
+                      />
+                    }
                     style={{ background: "#3d2a3a", border: "none" }}
                     bodyStyle={{ padding: "10px" }}
                     actions={[<PlayButton song={song} />]}
@@ -442,7 +456,17 @@ const Home = () => {
                 <Col xs={24} sm={12} md={6} key={song.id}>
                   <Card
                     hoverable
-                    cover={<img alt={song.title} src={song.cover || "/placeholder.svg"} />}
+                    cover={
+                      <img
+                        alt={song.title}
+                        src={song.cover || "/placeholder.svg"}
+                        onError={(e) => {
+                          e.target.onerror = null
+                          e.target.src = "https://placehold.co/400x400/3d2a3a/white?text=No+Image"
+                        }}
+                        style={{ width: "100%", height: "200px", objectFit: "cover" }}
+                      />
+                    }
                     style={{ background: "#3d2a3a", border: "none" }}
                     bodyStyle={{ padding: "10px" }}
                     actions={[<PlayButton song={song} />]}
@@ -528,7 +552,17 @@ const Home = () => {
                 <Col xs={24} sm={12} md={8} key={video.title}>
                   <Card
                     hoverable
-                    cover={<img alt={video.title} src={video.cover || "/placeholder.svg"} />}
+                    cover={
+                      <img
+                        alt={video.title}
+                        src={video.cover || "/placeholder.svg"}
+                        onError={(e) => {
+                          e.target.onerror = null
+                          e.target.src = "https://placehold.co/400x400/3d2a3a/white?text=No+Image"
+                        }}
+                        style={{ width: "100%", height: "200px", objectFit: "cover" }}
+                      />
+                    }
                     style={{ background: "#3d2a3a", border: "none" }}
                     bodyStyle={{ padding: "10px" }}
                   >
@@ -555,7 +589,17 @@ const Home = () => {
                 <Col xs={24} sm={12} md={6} key={album.title}>
                   <Card
                     hoverable
-                    cover={<img alt={album.title} src={album.cover || "/placeholder.svg"} />}
+                    cover={
+                      <img
+                        alt={album.title}
+                        src={album.cover || "/placeholder.svg"}
+                        onError={(e) => {
+                          e.target.onerror = null
+                          e.target.src = "https://placehold.co/400x400/3d2a3a/white?text=No+Image"
+                        }}
+                        style={{ width: "100%", height: "200px", objectFit: "cover" }}
+                      />
+                    }
                     style={{ background: "#3d2a3a", border: "none" }}
                     bodyStyle={{ padding: "10px" }}
                   >
@@ -582,7 +626,17 @@ const Home = () => {
                 <Col xs={24} sm={12} md={6} key={playlist.title}>
                   <Card
                     hoverable
-                    cover={<img alt={playlist.title} src={playlist.cover || "/placeholder.svg"} />}
+                    cover={
+                      <img
+                        alt={playlist.title}
+                        src={playlist.cover || "/placeholder.svg"}
+                        onError={(e) => {
+                          e.target.onerror = null
+                          e.target.src = "https://placehold.co/400x400/3d2a3a/white?text=No+Image"
+                        }}
+                        style={{ width: "100%", height: "200px", objectFit: "cover" }}
+                      />
+                    }
                     style={{ background: "#3d2a3a", border: "none" }}
                     bodyStyle={{ padding: "10px" }}
                   >

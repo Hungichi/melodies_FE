@@ -13,6 +13,8 @@ import ArtistProfileForm from './pages/Artist';
 import MusicUploadPage from './pages/Upload';
 import { AudioPlayerProvider } from './contexts/AudioPlayerContext';
 import MusicPlayerBar from './components/MusicPlayerBar';
+import Playlists from './pages/Playlist';
+import PlaylistsWithProvider from './pages/Playlist';
 
 const { Content } = Layout;
 
@@ -42,6 +44,7 @@ function App() {
                                 <Route path="/album" element={<Album />} />
                                 <Route path="/artist" element={<ArtistProfileForm/>} />
                                 <Route path="/upload" element={<MusicUploadPage/>}/>
+                                <Route path="/playlist" element={<PlaylistsWithProvider/>}/>
                             </Routes>
                         </Content>
                         <AppFooter />
