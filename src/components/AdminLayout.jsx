@@ -1,8 +1,8 @@
-import { Layout } from 'antd';
+import { Layout, Menu } from 'antd';
 import { Outlet } from 'react-router-dom';
 import AdminSidebar from './AdminSidebar';
 
-const { Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
 const AdminLayout = () => {
     return (
