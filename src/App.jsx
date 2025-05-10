@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import AdminLayout from './components/AdminLayout';
-import AdminDashboard from './pages/Dashboard';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { Layout } from 'antd';
@@ -16,6 +15,9 @@ import ArtistProfileForm from './pages/Artist';
 import ArtistRegistration from './pages/ArtistRegistration';
 import Album from './pages/Album';
 import AppFooter from './components/Footer';
+import ArtistRequest from './components/ArtistRequest';
+import ArtistDashboard from './pages/ArtistDashboard';
+import SongDetails from './pages/SongDetails';
 
 function App() {
     const [collapsed, setCollapsed] = useState(false);
@@ -36,7 +38,7 @@ function App() {
                                 }}
                             >
                                 <Navbar />
-                                <Content style={{ padding: '24px', background: '#412C3A' }}>
+                                <Content style={{  background: '#412C3A' }}>
                                     <Routes>
                                         <Route path="/" element={<Home />} />
                                         <Route path="/login" element={<Login />} />
@@ -46,6 +48,9 @@ function App() {
                                         <Route path="/album" element={<Album />} />
                                         <Route path="/artist" element={<ArtistProfileForm />} />
                                         <Route path="/artist-registration" element={<ArtistRegistration />} />
+                                        <Route path="/artist-dashboard" element={<ArtistDashboard />} />
+                                        <Route path="/song-detail/:id" element={<SongDetails />} />
+
                                     </Routes>
                                 </Content>
                                 <AppFooter />
@@ -55,7 +60,7 @@ function App() {
                 />
 
                 <Route path="/admin/*" element={<AdminLayout />}>
-                    <Route index element={<AdminDashboard />} />
+                    <Route path="artist-request" element={<ArtistRequest />} />
                 </Route>
             </Routes>
         </Router>

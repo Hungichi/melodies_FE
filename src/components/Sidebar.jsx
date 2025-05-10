@@ -34,6 +34,7 @@ const menuItems = [
 ];
 
 function Sidebar({ collapsed, setCollapsed }) {
+
   return (
     <Sider
       collapsible

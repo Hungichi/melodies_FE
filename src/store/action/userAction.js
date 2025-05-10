@@ -33,3 +33,8 @@ export const fetchCurrentUserProfile = async () => {
         setUserProfileError(err.response?.data?.message || 'Failed to fetch profile data');
     }
 };
+
+export const getSongDetail = async (id) => {
+    const response = api.get(`api/songs/${id}`)
+    return response
+}

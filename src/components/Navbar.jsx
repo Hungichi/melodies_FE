@@ -52,6 +52,7 @@ const Navbar = () => {
             label: 'Logout',
             onClick: handleLogout,
         },
+
     ];
 
     if (status === 'loading') {
@@ -86,9 +87,6 @@ const Navbar = () => {
                     <Space>
                         {!isLoggedIn ? (
                             <>
-
-
-
                                 <Link to="/login">
                                     <Button
                                         type="text"
@@ -108,24 +106,42 @@ const Navbar = () => {
                             </>
                         ) : (
                             <>
-                                <Popconfirm
-                                    title="Are you sure you want to request an artist?"
-                                    icon={<ExclamationCircleOutlined style={{ color: '#faad14' }} />}
-                                    onConfirm={() => navigate('/artist-registration')}
-                                    okText="Yes"
-                                    cancelText="No"
-                                >
+
+                                {user?.role !== 'artist' ? (
+                                    <Popconfirm
+                                        title="Are you sure you want to request an artist?"
+                                        icon={<ExclamationCircleOutlined style={{ color: '#faad14' }} />}
+                                        onConfirm={() => navigate('/artist-registration')}
+                                        okText="Yes"
+                                        cancelText="No"
+                                    >
+                                        <Button
+                                            type="primary"
+                                            style={{
+                                                backgroundColor: '#e835c2',
+                                                border: '1px solid rgba(255, 255, 255, 0.4)',
+                                                boxShadow: '0 0 8px rgba(255, 105, 180, 0.6)',
+                                            }}
+                                            icon={<UserAddOutlined />}
+                                        >
+                                            Request Artist
+                                        </Button>
+                                    </Popconfirm>
+                                ) : (
                                     <Button
                                         type="primary"
+                                        onClick={() => navigate('/artist-dashboard')}
                                         style={{
-                                            backgroundColor: '#e835c2',
+                                            background: 'linear-gradient(135deg, #6e44ff, #b892ff)',
                                             border: '1px solid rgba(255, 255, 255, 0.4)',
-                                            boxShadow: '0 0 8px rgba(255, 105, 180, 0.6)',
+                                            boxShadow: '0 0 8px rgba(91, 140, 0, 0.6)',
                                         }}
+                                        icon={<UserOutlined />}
                                     >
-                                        < UserAddOutlined />  Request Artist
+                                        Enter Artist Mode
                                     </Button>
-                                </Popconfirm>
+                                )}
+
                                 <Dropdown
                                     menu={{ items: dropdownItems }}
                                     trigger={['hover']}

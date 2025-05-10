@@ -40,7 +40,7 @@ const Login = () => {
             const user = await loginUser(values.email, values.password);
             console.log(user)
             if (user?.role == 'admin') {
-                navigate('/admin');
+                navigate('/admin/artist-request');
             } else {
                 navigate('/');
             }
@@ -59,6 +59,7 @@ const Login = () => {
                 alignItems: 'center',
                 minHeight: '100vh',
                 background: 'linear-gradient(135deg, #1a1221 0%, #2D1F31 100%)',
+                padding:28
             }}
         >
             <Card
