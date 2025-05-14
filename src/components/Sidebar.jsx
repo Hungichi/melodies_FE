@@ -24,7 +24,7 @@ const menuItems = [
     {
         key: '3',
         icon: <BookOutlined />,
-        label: <Link to="/album">Album</Link>,
+        label: <Link to="/album">Trending</Link>,
     },
     {
         key: '4',

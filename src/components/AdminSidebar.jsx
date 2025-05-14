@@ -13,7 +13,6 @@ const items = [
         icon: <UserOutlined />,
         label: <Link to="/admin/artist-request">Artist Requests</Link>,
     },
-    // Add more items as needed
 ];
 
 const AdminSidebar = () => {

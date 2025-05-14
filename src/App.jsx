@@ -41,7 +41,7 @@ function App() {
                                 }}
                             >
                                 <Navbar />
-                                <Content style={{ background: '#412C3A' }}>
+                                <Content style={{ background: '#231829' }}>
                                     <Routes>
                                         <Route path="/" element={<Home />} />
                                         <Route

@@ -80,7 +80,7 @@ const ArtistRequest = () => {
                             : request
                     )
                 );
-                message.warning(response.message); // Show success message
+                message.warning(response.message); 
             } else {
                 message.error('Failed to reject artist');
             }

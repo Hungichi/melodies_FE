@@ -20,7 +20,6 @@ const AppFooter = () => {
             }}
         >
             <Row gutter={[24, 24]} align="top">
-                {/* About Section */}
                 <Col xs={24} md={6}>
                     <Title
                         level={4}
