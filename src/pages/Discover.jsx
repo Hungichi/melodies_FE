@@ -17,90 +17,61 @@ const { Meta } = Card;
 
 // Sample data
 const genres = [
-    {
-        id: 1,
-        title: 'Rap Tracks',
-        cover: '/placeholder.svg?height=200&width=200',
-    },
-    {
-        id: 2,
-        title: 'Pop Tracks',
-        cover: '/placeholder.svg?height=200&width=200',
-    },
-    {
-        id: 3,
-        title: 'Rock Tracks',
-        cover: '/placeholder.svg?height=200&width=200',
-    },
-    {
-        id: 4,
-        title: 'Classic Tracks',
-        cover: '/placeholder.svg?height=200&width=200',
-    },
+  { id: 1, title: "Rap Tracks", cover: "https://tse4.mm.bing.net/th?id=OIP.jJlrNWPTfEiEdO_ZR1sKRQHaHb&pid=Api" },
+  { id: 2, title: "Pop Tracks", cover: "https://tse2.mm.bing.net/th?id=OIP.m2LD4MrEqMLtcyiYvki0PQHaEK&pid=Api" },
+  { id: 3, title: "Rock Tracks", cover: "https://tse4.mm.bing.net/th?id=OIP.J15B75l1ruDJ7uThNbqQRAHaHa&pid=Api" },
+  { id: 4, title: "Classic Tracks", cover: "https://tse2.mm.bing.net/th?id=OIP.uED70yKoH7czzqchUi28TgHaHa&pid=Api" },
+  { id: 5, title: "Jazz Vibes", cover: "https://tse2.mm.bing.net/th?id=OIP.zieq0MGu1rOjUMY5eiBi3QHaHW&w=470&h=470&c=7" },
+  { id: 6, title: "EDM Bangers", cover: "https://tse3.mm.bing.net/th?id=OIP.KsZ6_D37aZI-AIu-snkpIQHaHa&w=474&h=474&c=7" },
+  { id: 7, title: "Indie Pop", cover: "https://tse2.mm.bing.net/th?id=OIP.vOfTtjqhBpUd-g-bRGdoTQAAAA&w=474&h=474&c=7" },
+  { id: 8, title: "K-Pop", cover: "https://tse2.mm.bing.net/th?id=OIP.DgDPlvoPAPgU4ha8PRc5dAHaHa&w=474&h=474&c=7" },
+  
 ];
+
 
 const playlists = [
-    {
-        id: 1,
-        title: 'Sad Songs',
-        subtitle: 'Sad Playlist',
-        count: 24,
-        cover: '/placeholder.svg?height=200&width=200',
-    },
-    {
-        id: 2,
-        title: 'Chill Songs',
-        subtitle: 'Chill Playlist',
-        count: 32,
-        cover: '/placeholder.svg?height=200&width=200',
-    },
-    {
-        id: 3,
-        title: 'Workout Songs',
-        subtitle: 'Workout Songs',
-        count: 18,
-        cover: '/placeholder.svg?height=200&width=200',
-    },
-    {
-        id: 4,
-        title: -'Love Songs',
-        subtitle: 'Love Playlist',
-        count: 27,
-        cover: '/placeholder.svg?height=200&width=200',
-    },
-    {
-        id: 5,
-        title: 'Happy Songs',
-        subtitle: 'Happy Songs',
-        count: 30,
-        cover: '/placeholder.svg?height=200&width=200',
-    },
-];
+  { 
+    title: 'Sad Songs', 
+    cover: 'https://tse1.mm.bing.net/th?id=OIP.QE_H9FWJP-8ZsVpcJl8zWwHaHa&w=474&h=474&c=7' 
+  },
+  { 
+    title: 'Chill Songs', 
+    cover: 'https://tse1.mm.bing.net/th?id=OIP.R3YGoXiCS9EL4UJnTsP6nAHaHa&w=474&h=474&c=7' 
+  },
+  { 
+    title: 'Workout Songs', 
+    cover: 'https://tse2.mm.bing.net/th?id=OIP.fRAI7aZlOs_BY_eQYZanOAHaHa&w=474&h=474&c=7' 
+  },
+  { 
+    title: 'Love Playlists', 
+    cover: 'https://tse1.mm.bing.net/th?id=OIP.Ht8T5qersvFL_fzVhOM3yQHaHa&pid=Api' 
+  },
+  { 
+    title: 'Happy Tunes', 
+    cover: 'https://tse4.mm.bing.net/th?id=OIP.3ypnmZ-qgSCaJkWF7OGp0wHaHa&w=474&h=474&c=7' 
+  },
+  { 
+    title: 'Rainy Day Vibes', 
+    cover: 'https://tse3.mm.bing.net/th?id=OIP.FDQHV-O0NpI6ZiVsWFb7UAHaHa&w=474&h=474&c=7' 
+  },
+  { 
+    title: 'Late Night Drives', 
+    cover: 'https://tse4.mm.bing.net/th?id=OIP.eoyen5qAjXFA0aHNqqr_NAHaHa&w=474&h=474&c=7' 
+  },
+  { 
+    title: 'Focus Beats', 
+    cover: 'https://tse4.mm.bing.net/th?id=OIP.4RKrGPs7AWjNn5fMvn0vXQHaHa&w=474&h=474&c=7' 
+  }
+]
 
 const artists = [
-    { id: 1, name: 'Eminem', avatar: '/placeholder.svg?height=150&width=150' },
-    {
-        id: 2,
-        name: 'Imagine Dragons',
-        avatar: '/placeholder.svg?height=150&width=150',
-    },
-    { id: 3, name: 'Adele', avatar: '/placeholder.svg?height=150&width=150' },
-    {
-        id: 4,
-        name: 'Lana Del Rey',
-        avatar: '/placeholder.svg?height=150&width=150',
-    },
-    {
-        id: 5,
-        name: 'Harry Styles',
-        avatar: '/placeholder.svg?height=150&width=150',
-    },
-    {
-        id: 6,
-        name: 'Billie Eilish',
-        avatar: '/placeholder.svg?height=150&width=150',
-    },
-];
+  { name: 'Sơn Tùng M-TP', avatar: 'https://tse2.mm.bing.net/th?id=OIP.324bsajLsJTW9JAQ9tXJkgHaHa&w=474&h=474&c=7' },
+  { name: 'Đen Vâu', avatar: 'https://tse4.mm.bing.net/th?id=OIP.hiW7M6cj0k_BP24AYhLcJgHaHa&w=474&h=474&c=7' },
+  { name: 'Hoàng Thùy Linh', avatar: 'https://tse4.mm.bing.net/th?id=OIP.IAHLVTjvlQa1TJXRThnopAHaLG&w=474&h=474&c=7' },
+  { name: 'Erik', avatar: 'https://tse3.mm.bing.net/th?id=OIP.v8eVtfjjEStVWXkWXNC9YAHaJQ&w=474&h=474&c=7' },
+  { name: 'AMEE', avatar: 'https://tse4.mm.bing.net/th?id=OIP.PxhFT8aFwpPKm7l0ub8A_AHaKn&w=474&h=474&c=7' },
+  { name: 'Hoàng Dũng', avatar: 'https://tse4.mm.bing.net/th?id=OIP.FE9pO0f7qa92_W16gnq-2QHaLH&w=474&h=474&c=7' },
+]
 
 // Updated styles to match Login and ArtistProfileForm
 const styles = {
