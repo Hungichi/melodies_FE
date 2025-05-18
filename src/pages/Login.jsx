@@ -38,9 +38,9 @@ const Login = () => {
     const handleSubmit = async (values) => {
         try {
             const user = await loginUser(values.email, values.password);
-            console.log(user)
+            console.log(user);
             if (user?.role == 'admin') {
-                navigate('/admin');
+                navigate('/admin/artist-request');
             } else {
                 navigate('/');
             }
@@ -59,6 +59,7 @@ const Login = () => {
                 alignItems: 'center',
                 minHeight: '100vh',
                 background: 'linear-gradient(135deg, #1a1221 0%, #2D1F31 100%)',
+                padding: 28,
             }}
         >
             <Card
@@ -194,16 +195,6 @@ const Login = () => {
                                     marginBottom: 24,
                                 }}
                             >
-                                <Link
-                                    to="/forgot-password"
-                                    style={{
-                                        color: 'rgba(255, 255, 255, 0.9)',
-                                        fontSize: '14px',
-                                        fontWeight: '500',
-                                    }}
-                                >
-                                    Forgot password
-                                </Link>
                                 <Button
                                     type="primary"
                                     htmlType="submit"
@@ -222,42 +213,6 @@ const Login = () => {
                         </Form>
                     )}
                 </Formik>
-
-                {/* Social Login */}
-                <div style={{ padding: '0 24px', marginBottom: 24 }}>
-                    <Button
-                        icon={<GoogleOutlined style={{ fontSize: '18px' }} />}
-                        block
-                        size="large"
-                        style={{
-                            marginBottom: 16,
-                            borderRadius: '24px',
-                            height: '48px',
-                            border: '1px solid rgba(255, 255, 255, 0.3)',
-                            color: 'white',
-                            fontWeight: '500',
-                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                        }}
-                    >
-                        Google Login
-                    </Button>
-
-                    <Button
-                        icon={<FacebookOutlined style={{ fontSize: '20px' }} />}
-                        block
-                        size="large"
-                        style={{
-                            borderRadius: '24px',
-                            height: '48px',
-                            border: '1px solid rgba(255, 255, 255, 0.3)',
-                            color: 'white',
-                            fontWeight: '500',
-                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                        }}
-                    >
-                        Facebook Login
-                    </Button>
-                </div>
 
                 {/* Signup Section */}
                 <div

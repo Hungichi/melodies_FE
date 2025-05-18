@@ -2,7 +2,12 @@ import api from '../../config/axios';
 import { setToken, setUser } from '../slice/authSlice';
 import { store } from '../store';
 
-export const registerUser = async (username, email, password, confirmPassword) => {
+export const registerUser = async (
+    username,
+    email,
+    password,
+    confirmPassword
+) => {
     try {
         const response = await api.post('/api/auth/register', {
             username,
@@ -21,7 +26,11 @@ export const registerUser = async (username, email, password, confirmPassword) =
         }
     } catch (error) {
         console.error('Registration failed:', error);
-        throw new Error(error.response?.data?.message || error.message || 'Registration failed');
+        throw new Error(
+            error.response?.data?.message ||
+                error.message ||
+                'Registration failed'
+        );
     }
 };
 
@@ -38,9 +47,11 @@ export const loginUser = async (email, password) => {
             store.dispatch(setUser(user));
         }
 
-        return  user;
+        return user;
     } catch (error) {
         console.error('Login failed:', error);
-        throw new Error(error.response?.data?.message || error.message || 'Login failed');
+        throw new Error(
+            error.response?.data?.message || error.message || 'Login failed'
+        );
     }
 };

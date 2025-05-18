@@ -22,17 +22,16 @@ import {
 const { Title, Paragraph } = Typography;
 const { TextArea } = Input;
 
-// Updated themeColors to match the Login component
 const themeColors = {
-    primary: '#ff1f9c', // Pink from Login button gradient
-    secondary: '#ff4db2', // Secondary pink from Login gradient
-    success: '#33b1ff', // Blue from Sign Up button
-    background: 'linear-gradient(135deg, #1a1221 0%, #2D1F31 100%)', // Background gradient from Login
-    cardBackground: 'linear-gradient(135deg, #3d2a3a 0%, #4d3649 100%)', // Card gradient from Login
-    textPrimary: '#FFFFFF', // White text from Login
-    textSecondary: 'rgba(255, 255, 255, 0.9)', // Slightly muted white from Login
-    inputBackground: 'rgba(91, 73, 89, 0.7)', // Input background from Login
-    border: 'rgba(255, 31, 156, 0.3)', // Border color from Login inputs
+    primary: '#ff1f9c',
+    secondary: '#ff4db2',
+    success: '#33b1ff',
+    background: 'linear-gradient(135deg, #1a1221 0%, #2D1F31 100%)',
+    cardBackground: 'linear-gradient(135deg, #3d2a3a 0%, #4d3649 100%)',
+    textPrimary: '#FFFFFF',
+    textSecondary: 'rgba(255, 255, 255, 0.9)',
+    inputBackground: 'rgba(91, 73, 89, 0.7)',
+    border: 'rgba(255, 31, 156, 0.3)',
 };
 
 const ArtistProfileForm = () => {
@@ -41,15 +40,15 @@ const ArtistProfileForm = () => {
 
     const onFinish = (values) => {
         console.log('Form submitted:', { ...values, profileImage: imageUrl });
-        message.success('Thông tin nghệ sĩ đã được lưu thành công!');
+        message.success('Artist profile saved successfully!');
     };
 
     const beforeUpload = (file) => {
         const isJpgOrPng =
             file.type === 'image/jpeg' || file.type === 'image/png';
-        if (!isJpgOrPng) message.error('Bạn chỉ có thể tải lên file JPG/PNG!');
+        if (!isJpgOrPng) message.error('You can only upload JPG/PNG files!');
         const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isLt2M) message.error('Hình ảnh phải nhỏ hơn 2MB!');
+        if (!isLt2M) message.error('Image must be smaller than 2MB!');
         return isJpgOrPng && isLt2M;
     };
 
@@ -77,7 +76,7 @@ const ArtistProfileForm = () => {
                     fontSize: 14,
                 }}
             >
-                Tải ảnh lên
+                Upload Image
             </div>
         </div>
     );
@@ -94,27 +93,27 @@ const ArtistProfileForm = () => {
                     colorSuccess: themeColors.success,
                     colorInfo: themeColors.primary,
                     colorWarning: themeColors.secondary,
-                    colorBgContainer: 'transparent', // Use gradient from cardBackground
+                    colorBgContainer: 'transparent',
                     colorTextBase: themeColors.textPrimary,
                     colorBorder: themeColors.border,
                     fontSize: 16,
-                    borderRadius: 24, // Match Login's rounded corners
+                    borderRadius: 24,
                 },
                 components: {
                     Card: {
                         boxShadow:
-                            '0 10px 30px rgba(0,0,0,0.4), 0 0 20px rgba(255, 31, 156, 0.15)', // Match Login shadow
+                            '0 10px 30px rgba(0,0,0,0.4), 0 0 20px rgba(255, 31, 156, 0.15)',
                     },
                     Input: {
                         colorBgContainer: themeColors.inputBackground,
-                        colorTextPlaceholder: 'rgba(255, 255, 255, 0.8)', // Match Login placeholder
+                        colorTextPlaceholder: 'rgba(255, 255, 255, 0.8)',
                         paddingBlock: 12,
                         paddingInline: 16,
                         hoverBorderColor: themeColors.primary,
                     },
                     Button: {
                         defaultBg:
-                            'linear-gradient(135deg, #ff1f9c 0%, #ff4db2 100%)', // Match Login button gradient
+                            'linear-gradient(135deg, #ff1f9c 0%, #ff4db2 100%)',
                         defaultColor: '#FFFFFF',
                         paddingBlock: 12,
                     },
@@ -157,10 +156,10 @@ const ArtistProfileForm = () => {
                                     marginBottom: 8,
                                     fontWeight: 'bold',
                                     textShadow:
-                                        '0 0 10px rgba(255, 31, 156, 0.5)', // Match Login title glow
+                                        '0 0 10px rgba(255, 31, 156, 0.5)',
                                 }}
                             >
-                                Thông Tin Nghệ Sĩ
+                                Artist Profile
                             </Title>
                             <Paragraph
                                 style={{
@@ -169,8 +168,7 @@ const ArtistProfileForm = () => {
                                     fontSize: 16,
                                 }}
                             >
-                                Vui lòng điền đầy đủ thông tin để hoàn tất hồ sơ
-                                nghệ sĩ của bạn
+                                Please complete your artist profile to proceed
                             </Paragraph>
                         </div>
 
@@ -189,13 +187,14 @@ const ArtistProfileForm = () => {
                                             fontWeight: 500,
                                         }}
                                     >
-                                        Tên nghệ sĩ (hoặc nghệ danh)
+                                        Artist Name or Stage Name
                                     </span>
                                 }
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Vui lòng nhập tên nghệ sĩ!',
+                                        message:
+                                            'Please enter your artist name!',
                                     },
                                 ]}
                             >
@@ -207,12 +206,12 @@ const ArtistProfileForm = () => {
                                             }}
                                         />
                                     }
-                                    placeholder="Nhập tên nghệ sĩ hoặc nghệ danh của bạn"
+                                    placeholder="Enter your artist or stage name"
                                     size="large"
                                     style={{
                                         height: '56px',
                                         borderRadius: '24px',
-                                    }} // Match Login input style
+                                    }}
                                 />
                             </Form.Item>
 
@@ -225,17 +224,17 @@ const ArtistProfileForm = () => {
                                             fontWeight: 500,
                                         }}
                                     >
-                                        Email liên hệ
+                                        Contact Email
                                     </span>
                                 }
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Vui lòng nhập email!',
+                                        message: 'Please enter your email!',
                                     },
                                     {
                                         type: 'email',
-                                        message: 'Email không hợp lệ!',
+                                        message: 'Invalid email address!',
                                     },
                                 ]}
                             >
@@ -247,7 +246,7 @@ const ArtistProfileForm = () => {
                                             }}
                                         />
                                     }
-                                    placeholder="Nhập email liên hệ"
+                                    placeholder="Enter your email address"
                                     size="large"
                                     style={{
                                         height: '56px',
@@ -265,17 +264,18 @@ const ArtistProfileForm = () => {
                                             fontWeight: 500,
                                         }}
                                     >
-                                        Số điện thoại
+                                        Phone Number
                                     </span>
                                 }
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Vui lòng nhập số điện thoại!',
+                                        message:
+                                            'Please enter your phone number!',
                                     },
                                     {
                                         pattern: /^[0-9]{10,11}$/,
-                                        message: 'Số điện thoại không hợp lệ!',
+                                        message: 'Invalid phone number!',
                                     },
                                 ]}
                             >
@@ -287,7 +287,7 @@ const ArtistProfileForm = () => {
                                             }}
                                         />
                                     }
-                                    placeholder="Nhập số điện thoại"
+                                    placeholder="Enter your phone number"
                                     size="large"
                                     style={{
                                         height: '56px',
@@ -305,13 +305,14 @@ const ArtistProfileForm = () => {
                                             fontWeight: 500,
                                         }}
                                     >
-                                        Mô tả ngắn về nghệ sĩ
+                                        Short Artist Bio
                                     </span>
                                 }
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Vui lòng nhập mô tả về bạn!',
+                                        message:
+                                            'Please enter a short artist bio!',
                                     },
                                 ]}
                                 extra={
@@ -321,13 +322,13 @@ const ArtistProfileForm = () => {
                                             fontSize: 14,
                                         }}
                                     >
-                                        Giới thiệu bản thân, phong cách âm nhạc,
-                                        thể loại theo đuổi
+                                        Introduce yourself, your music style,
+                                        and your genre
                                     </span>
                                 }
                             >
                                 <TextArea
-                                    placeholder="Giới thiệu bản thân, phong cách âm nhạc, thể loại theo đuổi..."
+                                    placeholder="Tell us about yourself, your music style, and preferred genre..."
                                     rows={6}
                                     showCount
                                     maxLength={500}
@@ -344,7 +345,7 @@ const ArtistProfileForm = () => {
                                             fontWeight: 500,
                                         }}
                                     >
-                                        Ảnh đại diện hoặc ảnh nghệ sĩ
+                                        Profile Picture
                                     </span>
                                 }
                                 extra={
@@ -354,8 +355,8 @@ const ArtistProfileForm = () => {
                                             fontSize: 14,
                                         }}
                                     >
-                                        Hỗ trợ định dạng: JPG, PNG. Kích thước
-                                        tối đa: 2MB
+                                        Supported formats: JPG, PNG. Max size:
+                                        2MB
                                     </span>
                                 }
                             >
@@ -393,15 +394,15 @@ const ArtistProfileForm = () => {
                                         height: '52px',
                                         borderRadius: '24px',
                                         background:
-                                            'linear-gradient(135deg, #ff1f9c 0%, #ff4db2 100%)', // Match Login button
+                                            'linear-gradient(135deg, #ff1f9c 0%, #ff4db2 100%)',
                                         border: 'none',
                                         fontSize: 16,
                                         fontWeight: 500,
                                         boxShadow:
-                                            '0 0 20px rgba(255, 31, 156, 0.3)', // Add subtle glow
+                                            '0 0 20px rgba(255, 31, 156, 0.3)',
                                     }}
                                 >
-                                    Lưu Thông Tin
+                                    Save Profile
                                 </Button>
                             </Form.Item>
                         </Form>
